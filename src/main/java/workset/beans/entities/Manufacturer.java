@@ -1,21 +1,45 @@
 package workset.beans.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-import workset.Services.Service;
-import workset.beans.interfaces.InterfaceCountry;
+import workset.services.Service;
 import workset.beans.interfaces.InterfaceManufacturer;
 
-
+@Entity
+@Table( name = "manufacturer")
 public class Manufacturer implements InterfaceManufacturer{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2659594803343434546L;
+
+	@Id
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 	
+	@Column(name = "name")
 	@Size(min = 0, max = 45)
 	private String name;
-	
+
+	@Column(name = "fullname")
 	@Size(min = 0, max = 150)
 	private String fullName;
-	private InterfaceCountry country;
+
+
+	//@Id
+//	@Column(name = "country_id", insertable=false, updatable=false)
+//	@Size(min = 0, max = 150)
+//	private int countryId;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional=true)
+	private Country country;
 	
 	public Manufacturer() {
 		super();
@@ -24,7 +48,7 @@ public class Manufacturer implements InterfaceManufacturer{
 		country=new Country();
 	}
 
-	public Manufacturer(int id, String name, InterfaceCountry country) {
+	public Manufacturer(int id, String name, Country country) {
 		super();
 		this.id = id;
 		name=(name.length()==0?Service.EMPTY:name);
@@ -33,7 +57,7 @@ public class Manufacturer implements InterfaceManufacturer{
 		this.country = country;
 	}
 	
-	public Manufacturer(int id, String name, String fullName, InterfaceCountry country) {
+	public Manufacturer(int id, String name, String fullName, Country country) {
 		super();
 		this.id = id;
 		name=(name.length()==0?Service.EMPTY:name);
@@ -89,10 +113,9 @@ public class Manufacturer implements InterfaceManufacturer{
 	/**
 	 * @param country the country to set
 	 */
-	public void setCountry(InterfaceCountry country) {
+	public void setCountry(Country country) {
 		this.country = country;
 	}
-	
-	
+
 	
 }

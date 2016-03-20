@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+	<session-factory>
+	 	<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost:3306/phones</property>
+		<property name="hibernate.connection.username">root</property>
+		<property name="hibernate.connection.password"></property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="show_sql">true</property>
+		<!-- <property name="format_sql">true</property> -->
+		
+		
+		<mapping class="workset.beans.entities.BatteryType" />
+		<mapping class="workset.beans.entities.BodyStuff" />
+		<mapping class="workset.beans.entities.BodyColor" />
+		<mapping class="workset.beans.entities.Manufacturer" />
+		<mapping class="workset.beans.entities.Country" />
+		<mapping class="workset.beans.entities.BodyType" />
+		<mapping class="workset.beans.entities.Customer" />
+		<mapping class="workset.beans.entities.Os" />
+		<mapping class="workset.beans.entities.PhoneType" />
+		<mapping class="workset.beans.entities.Processor" />
+		<mapping class="workset.beans.entities.ScratchProtect" />
+		<mapping class="workset.beans.entities.ScreenResolution" />
+		<mapping class="workset.beans.entities.ScreenTechnology" />
+		<mapping class="workset.beans.entities.SimCardFormat" />
+
+		<mapping class="workset.beans.entities.User" />
+		<mapping class="workset.beans.entities.Role" />		
+
+		<mapping class="workset.beans.entities.Info" />
+		<mapping class="workset.beans.entities.Log" />
+		
+		<mapping class="workset.beans.entities.Photo" />
+		<mapping class="workset.beans.entities.Price" />
+		<mapping class="workset.beans.entities.Phone" />		
+	</session-factory>
+</hibernate-configuration>

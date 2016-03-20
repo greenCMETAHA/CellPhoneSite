@@ -1,14 +1,22 @@
 package workset.beans.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-import workset.Services.Service;
-import workset.beans.interfaces.InterfaceCountry;
+import workset.services.Service;
 
+@Entity
+@Table(name = "country")
 public class Country implements workset.beans.interfaces.InterfaceCountry {
+	@Id
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 	
-	@Size(min = 0, max = 45)
+	@Column(name = "name")
+	@Size(min=0, max=45)
 	private String name;
 	
 	public Country() {
@@ -50,5 +58,10 @@ public class Country implements workset.beans.interfaces.InterfaceCountry {
 		this.name = Service.validateString(name,45);
 	}
 	
+	
+	public String toString(){
+		
+		return ""+getId()+", "+getName();
+	}
 
 }

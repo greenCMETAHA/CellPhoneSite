@@ -1,16 +1,25 @@
 package workset.beans.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-import workset.Services.Service;
-import workset.beans.interfaces.InterfaceInfo;
+import workset.services.Service;
 
+@Entity
+@Table( name = "information")
 public class Info implements workset.beans.interfaces.InterfaceInfo{
+	@Id
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 	
+	@Column(name = "name")
 	@Size(min = 0, max = 20)
 	private String name;
 	
+	@Column(name = "value")
 	@Size(min = 0, max = 100)
 	private String value;
 	

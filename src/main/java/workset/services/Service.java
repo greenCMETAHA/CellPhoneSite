@@ -1,4 +1,4 @@
-package workset.Services;
+package workset.services;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,6 +12,7 @@ public class Service {
 	public static String PATH_TO_JPG="resources\\jpg\\";
 	public static String EMPTY="<empty>";
 	public static int ID_EMPTY_CUSTOMER=0;
+	public static int LOG_ON_PAGE=20;
 	
 	public Service(){
 		

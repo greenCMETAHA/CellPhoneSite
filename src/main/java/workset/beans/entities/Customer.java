@@ -1,33 +1,50 @@
 package workset.beans.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-import workset.Services.Service;
+import workset.services.Service;
 
+@Entity
+@Table( name = "customers")
 public class Customer {
+	
+	@Id
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 	
+	@Column(name = "fullname")
 	@Size(min = 0, max = 45)
 	private String fullName;
 	
+	@Column(name = "lastname")
 	@Size(min = 0, max = 45)
 	private String lastName;
 	
+	@Column(name = "companyname")
 	@Size(min = 0, max = 45)
 	private String companyName;
 	
+	@Column(name = "address")
 	@Size(min = 0, max = 100)
 	private String Address;
 	
+	@Column(name = "town")
 	@Size(min = 0, max = 45)
 	private String town;
 	
+	@Column(name = "zip")
 	@Size(min = 0, max = 45)
 	private String zip;
 	
+	@Column(name = "email")
 	@Size(min = 0, max = 45)
 	private String EMail;
 	
+	@Column(name = "phone")
 	@Size(min = 0, max = 30)
 	private String phone;
 	

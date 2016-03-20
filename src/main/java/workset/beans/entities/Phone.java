@@ -11,79 +11,215 @@ import workset.beans.interfaces.InterfaceSIMCardFormat;
 import workset.beans.interfaces.InterfaceScratchProtect;
 import workset.beans.interfaces.InterfaceScreenResolution;
 import workset.beans.interfaces.InterfaceScreenTechnology;
+import workset.dao.interfaces.InterfaceSimpleDAO;
 
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Set;
 
-import workset.beans.interfaces.InterfaceBatteryType;
-import workset.beans.interfaces.InterfaceBodyColor;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
+@Entity
+@Table( name = "phones")
 public class Phone implements InterfacePhone {
+	
+	@Id
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
+	
+	@Column(name = "name")
+	@Size(min=0, max=45)
 	private String name;
+	
+	@Column(name = "modelyear")
+	@Size(min=0, max=20)
 	private String modelYear;
-	private InterfaceOS Os;  //operation system
+	
+	@Column(name = "screensize")
 	private double screenSize;
-	private InterfaceScreenResolution screenResolution;
-	private InterfaceScreenTechnology screenTechnology;
-	private double operationMemory;
-	private double flashMemory;
-	private boolean memoryCard;
-	private double camera;  //megapixels
-	private double dualSIM;
-	private int bataryCapacity;
-	private InterfaceBodyType bodyType;
-	private boolean lte;
-	private HashSet<InterfaceBodyColor> bodyColor;
-	private InterfaceScratchProtect scratchprotect;
-	private InterfaceProcessor processor;
-	private double processorFrequency;
-	private byte coresNumber;
-	private double frontCamera; //megapixels
-	private boolean builtinFlash;
-	private boolean autoFocus;
-	private boolean opticalStabilization;
-	private boolean shockResistanceEsnclosure;
-	private boolean dustProtection;
-	private boolean qwertyKeyboard;
-	private boolean fingerPrint;
-	private boolean sosKey;
-	private boolean accelerometer;
-	private boolean gyroscope;
-	private boolean lightSensor;
-	private boolean fmRadio;
-	private boolean fmTransmitter;
-	private boolean gps;
-	private boolean glonass;
-	private boolean hspa;
-	private boolean nfc;
-	private boolean bluetooth;
-	private boolean wifi;
-	private boolean usb;
-	private boolean audioOutput;
-	private boolean wirelessCharger;
-	private boolean Infrared;
-	private double timeSpeak;
-	private double timewait;
-	private boolean stilus;
-	private double length; 
-	private double width; 
-	private double thickness; 
-	private double weight; 
-	private double judgement; 
-	private String description; 
-	private String specification; 
-	private InterfaceManufacturer manufacturer; 
-	private InterfaceBatteryType batteryType; 
-	private InterfaceSIMCardFormat simCardFormat; 
-	private boolean nonRemovableBattery; 
 
-	private HashSet<InterfacePhoto> photos;
-	private HashSet<InterfacePrice> prices;
+	@Column(name = "operationmemory")
+	private double operationMemory;
 	
+	@Column(name = "flashmemory")
+	private double flashMemory;
+	
+	@Column(name = "memorycard")
+	private boolean memoryCard;
+	
+	@Column(name = "camera")
+	private double camera;  //megapixels
+	
+	@Column(name = "dualsim")
+	private double dualSIM;
+	
+	@Column(name = "batarycapacity")
+	private int bataryCapacity;
+	
+	@Column(name = "lte")
+	private boolean lte;
+	
+	@Column(name = "processorfrequency")
+	private double processorFrequency;
+	
+	@Column(name = "coresnumber")
+	private byte coresNumber;
+	
+	@Column(name = "frontcamera")
+	private double frontCamera; //megapixels
+	
+	@Column(name = "builtinflash")
+	private boolean builtinFlash;
+	
+	@Column(name = "autofocus")
+	private boolean autoFocus;
+	
+	@Column(name = "opticalstabilization")
+	private boolean opticalStabilization;
+	
+	@Column(name = "shockresistanceenclosure")
+	private boolean shockResistanceEnclosure;
+	
+	@Column(name = "dustprotection")
+	private boolean dustProtection;
+	
+	@Column(name = "qwertykeyboard")
+	private boolean qwertyKeyboard;
+	
+	@Column(name = "fingerprint")
+	private boolean fingerPrint;
+	
+	@Column(name = "soskey")
+	private boolean sosKey;
+	
+	@Column(name = "accelerometer")
+	private boolean accelerometer;
+	
+	@Column(name = "gyroscope")
+	private boolean gyroscope;
+	
+	@Column(name = "lightsensor")
+	private boolean lightSensor;
+	
+	@Column(name = "fmradio")
+	private boolean fmRadio;
+	
+	@Column(name = "fmtransmitter")
+	private boolean fmTransmitter;
+	
+	@Column(name = "gps")
+	private boolean gps;
+	
+	@Column(name = "glonass")
+	private boolean glonass;
+	
+	@Column(name = "hspa")
+	private boolean hspa;
+	
+	@Column(name = "nfc")
+	private boolean nfc;
+	
+	@Column(name = "bluetooth")
+	private boolean bluetooth;
+	
+	@Column(name = "wifi")
+	private boolean wifi;
+	
+	@Column(name = "usb")
+	private boolean usb;
+	
+	@Column(name = "audiooutput")
+	private boolean audioOutput;
+	
+	@Column(name = "wirelesscharger")
+	private boolean wirelessCharger;
+	
+	@Column(name = "infrared")
+	private boolean infrared;
+	
+	@Column(name = "timespeak")
+	private double timeSpeak;
+	
+	@Column(name = "timewait")
+	private double timewait;
+	
+	@Column(name = "stilus")
+	private boolean stilus;
+	
+	@Column(name = "length")
+	private double length; 
+	
+	@Column(name = "width")
+	private double width; 
+	
+	@Column(name = "thickness")
+	private double thickness; 
+	
+	@Column(name = "weight")
+	private double weight; 
+	
+	@Column(name = "judgement")
+	private double judgement; 
+	
+	@Column(name = "description")
+	private String description;
+	
+	@Column(name = "specification")
+	private String specification;
+	
+	@Column(name = "nonremovablebattery")
+	private boolean nonRemovableBattery;
+	
+	@Column(name = "discount")
 	private double discount;
-	private int inStock;
 	
+	@Column(name = "instock")
+	private int inStock;
+
+	
+	@ManyToOne
+	private Os os;  //operation system
+	
+	@ManyToOne
+	private ScreenResolution screenResolution;
+	
+	@ManyToOne
+	private ScreenTechnology screenTechnology;
+	
+	@ManyToOne
+	private BodyType bodyType;
+	
+	@ManyToOne
+	private ScratchProtect scratchprotect;
+	
+	@ManyToOne
+	private Processor processor;
+	
+	@ManyToOne
+	private Manufacturer manufacturer; 
+	
+	@ManyToOne
+	private BatteryType batteryType; 
+	
+	@ManyToOne
+	private SimCardFormat simCardFormat; 
+	
+	@OneToMany
+	private Set<Photo> photos;
+	
+	@OneToMany
+	private Set<Price> prices;
+	
+	@OneToMany
+	private Set<BodyColor> bodyColor;
+
+
 	public Phone() {
 		super();
 	}
@@ -91,7 +227,7 @@ public class Phone implements InterfacePhone {
 	public Phone(int id, String name, String modelYear, InterfaceOS os, double screenSize,
 			InterfaceScreenResolution screenResolution, InterfaceScreenTechnology screenTechnology,
 			double operationMemory, double flashMemory, boolean memoryCard, double camera, double dualSIM,
-			int bataryCapacity, InterfaceBodyType bodyType, boolean lte, HashSet<InterfaceBodyColor> bodyColor,
+			int bataryCapacity, InterfaceBodyType bodyType, boolean lte, HashSet<BodyColor> bodyColor,
 			InterfaceScratchProtect scratchprotect, InterfaceProcessor processor, double processorFrequency,
 			byte coresNumber, double frontCamera, boolean builtinFlash, boolean autoFocus, boolean opticalStabilization,
 			boolean shockResistanceEsnclosure, boolean dustProtection, boolean qwertyKeyboard, boolean fingerPrint,
@@ -100,34 +236,34 @@ public class Phone implements InterfacePhone {
 			boolean wifi, boolean usb, boolean audioOutput, boolean wirelessCharger, boolean infrared, double timeSpeak,
 			double timewait, boolean stilus, double length, double width, double thickness, double weight,
 			double judgement, String description, String specification, InterfaceManufacturer manufacturer,
-			InterfaceBatteryType batteryType, InterfaceSIMCardFormat simCardFormat, boolean nonRemovableBattery,
-			HashSet<InterfacePhoto> photos, HashSet<InterfacePrice> prices, double discount, int inStock) {
+			InterfaceSimpleDAO batteryType, InterfaceSIMCardFormat simCardFormat, boolean nonRemovableBattery,
+			Set<Photo> photos, HashSet<Price> prices, double discount, int inStock, boolean shockResistanceEnclosure) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.modelYear = modelYear;
-		Os = os;
+		this.os = (workset.beans.entities.Os) os;
 		this.screenSize = screenSize;
-		this.screenResolution = screenResolution;
-		this.screenTechnology = screenTechnology;
+		this.screenResolution = (ScreenResolution) screenResolution;
+		this.screenTechnology = (ScreenTechnology) screenTechnology;
 		this.operationMemory = operationMemory;
 		this.flashMemory = flashMemory;
 		this.memoryCard = memoryCard;
 		this.camera = camera;
 		this.dualSIM = dualSIM;
 		this.bataryCapacity = bataryCapacity;
-		this.bodyType = bodyType;
+		this.bodyType = (BodyType) bodyType;
 		this.lte = lte;
 		this.bodyColor = bodyColor;
-		this.scratchprotect = scratchprotect;
-		this.processor = processor;
+		this.scratchprotect = (ScratchProtect) scratchprotect;
+		this.processor = (Processor) processor;
 		this.processorFrequency = processorFrequency;
 		this.coresNumber = coresNumber;
 		this.frontCamera = frontCamera;
 		this.builtinFlash = builtinFlash;
 		this.autoFocus = autoFocus;
 		this.opticalStabilization = opticalStabilization;
-		this.shockResistanceEsnclosure = shockResistanceEsnclosure;
+		this.shockResistanceEnclosure = shockResistanceEnclosure;
 		this.dustProtection = dustProtection;
 		this.qwertyKeyboard = qwertyKeyboard;
 		this.fingerPrint = fingerPrint;
@@ -146,7 +282,7 @@ public class Phone implements InterfacePhone {
 		this.usb = usb;
 		this.audioOutput = audioOutput;
 		this.wirelessCharger = wirelessCharger;
-		Infrared = infrared;
+		this.infrared = infrared;
 		this.timeSpeak = timeSpeak;
 		this.timewait = timewait;
 		this.stilus = stilus;
@@ -157,9 +293,9 @@ public class Phone implements InterfacePhone {
 		this.judgement = judgement;
 		this.description = description;
 		this.specification = specification;
-		this.manufacturer = manufacturer;
-		this.batteryType = batteryType;
-		this.simCardFormat = simCardFormat;
+		this.manufacturer = (Manufacturer) manufacturer;
+		this.batteryType = (BatteryType) batteryType;
+		this.simCardFormat = (SimCardFormat) simCardFormat;
 		this.nonRemovableBattery = nonRemovableBattery;
 		this.photos = photos;
 		this.prices = prices;
@@ -170,7 +306,7 @@ public class Phone implements InterfacePhone {
 	public Phone(int id, String name, String modelYear, InterfaceOS os, double screenSize,
 			InterfaceScreenResolution screenResolution, InterfaceScreenTechnology screenTechnology,
 			double operationMemory, double flashMemory, boolean memoryCard, double camera, double dualSIM,
-			int bataryCapacity, InterfaceBodyType bodyType, boolean lte, HashSet<InterfaceBodyColor> bodyColor,
+			int bataryCapacity, InterfaceBodyType bodyType, boolean lte, HashSet<BodyColor> bodyColor,
 			InterfaceScratchProtect scratchprotect, InterfaceProcessor processor, double processorFrequency,
 			byte coresNumber, double frontCamera, boolean builtinFlash, boolean autoFocus, boolean opticalStabilization,
 			boolean shockResistanceEsnclosure, boolean dustProtection, boolean qwertyKeyboard, boolean fingerPrint,
@@ -179,34 +315,34 @@ public class Phone implements InterfacePhone {
 			boolean wifi, boolean usb, boolean audioOutput, boolean wirelessCharger, boolean infrared, double timeSpeak,
 			double timewait, boolean stilus, double length, double width, double thickness, double weight,
 			double judgement, String description, String specification, InterfaceManufacturer manufacturer,
-			InterfaceBatteryType batteryType, InterfaceSIMCardFormat simCardFormat, boolean nonRemovableBattery,
-			HashSet<InterfacePhoto> photos, HashSet<InterfacePrice> prices) {
+			InterfaceSimpleDAO batteryType, InterfaceSIMCardFormat simCardFormat, boolean nonRemovableBattery,
+			Set<Photo> photos, HashSet<Price> prices, boolean shockResistanceEnclosure) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.modelYear = modelYear;
-		Os = os;
+		this.os = (Os) os;
 		this.screenSize = screenSize;
-		this.screenResolution = screenResolution;
-		this.screenTechnology = screenTechnology;
+		this.screenResolution = (ScreenResolution) screenResolution;
+		this.screenTechnology = (ScreenTechnology) screenTechnology;
 		this.operationMemory = operationMemory;
 		this.flashMemory = flashMemory;
 		this.memoryCard = memoryCard;
 		this.camera = camera;
 		this.dualSIM = dualSIM;
 		this.bataryCapacity = bataryCapacity;
-		this.bodyType = bodyType;
+		this.bodyType = (BodyType) bodyType;
 		this.lte = lte;
 		this.bodyColor = bodyColor;
-		this.scratchprotect = scratchprotect;
-		this.processor = processor;
+		this.scratchprotect = (ScratchProtect) scratchprotect;
+		this.processor = (Processor) processor;
 		this.processorFrequency = processorFrequency;
 		this.coresNumber = coresNumber;
 		this.frontCamera = frontCamera;
 		this.builtinFlash = builtinFlash;
 		this.autoFocus = autoFocus;
 		this.opticalStabilization = opticalStabilization;
-		this.shockResistanceEsnclosure = shockResistanceEsnclosure;
+		this.shockResistanceEnclosure = shockResistanceEnclosure;
 		this.dustProtection = dustProtection;
 		this.qwertyKeyboard = qwertyKeyboard;
 		this.fingerPrint = fingerPrint;
@@ -225,7 +361,7 @@ public class Phone implements InterfacePhone {
 		this.usb = usb;
 		this.audioOutput = audioOutput;
 		this.wirelessCharger = wirelessCharger;
-		Infrared = infrared;
+		this.infrared = infrared;
 		this.timeSpeak = timeSpeak;
 		this.timewait = timewait;
 		this.stilus = stilus;
@@ -236,9 +372,9 @@ public class Phone implements InterfacePhone {
 		this.judgement = judgement;
 		this.description = description;
 		this.specification = specification;
-		this.manufacturer = manufacturer;
-		this.batteryType = batteryType;
-		this.simCardFormat = simCardFormat;
+		this.manufacturer = (Manufacturer) manufacturer;
+		this.batteryType = (BatteryType) batteryType;
+		this.simCardFormat = (SimCardFormat) simCardFormat;
 		this.nonRemovableBattery = nonRemovableBattery;
 		this.photos = photos;
 		this.prices = prices;
@@ -277,11 +413,11 @@ public class Phone implements InterfacePhone {
 	}
 
 	public InterfaceOS getOs() {
-		return Os;
+		return os;
 	}
 
 	public void setOs(InterfaceOS os) {
-		Os = os;
+		this.os = (Os) os;
 	}
 
 	public double getScreenSize() {
@@ -297,7 +433,7 @@ public class Phone implements InterfacePhone {
 	}
 
 	public void setScreenResolution(InterfaceScreenResolution screenResolution) {
-		this.screenResolution = screenResolution;
+		this.screenResolution = (ScreenResolution) screenResolution;
 	}
 
 	public InterfaceScreenTechnology getScreenTechnology() {
@@ -305,7 +441,7 @@ public class Phone implements InterfacePhone {
 	}
 
 	public void setScreenTechnology(InterfaceScreenTechnology screenTechnology) {
-		this.screenTechnology = screenTechnology;
+		this.screenTechnology = (ScreenTechnology) screenTechnology;
 	}
 
 	public double getOperationMemory() {
@@ -361,7 +497,7 @@ public class Phone implements InterfacePhone {
 	}
 
 	public void setBodyType(InterfaceBodyType bodyType) {
-		this.bodyType = bodyType;
+		this.bodyType = (BodyType) bodyType;
 	}
 
 	public boolean isLte() {
@@ -372,12 +508,16 @@ public class Phone implements InterfacePhone {
 		this.lte = lte;
 	}
 
-	public HashSet<InterfaceBodyColor> getBodyColor() {
+	public Set<BodyColor> getBodyColor() {
 		return bodyColor;
 	}
 
-	public void setBodyColor(HashSet<InterfaceBodyColor> bodyColor) {
+	public void setBodyColor(HashSet<BodyColor> bodyColor) {
 		this.bodyColor = bodyColor;
+	}
+	
+	public void setBodyColor(BodyColor bodyColor) {
+		this.bodyColor.add(bodyColor);
 	}
 
 	public InterfaceScratchProtect getScratchprotect() {
@@ -385,7 +525,7 @@ public class Phone implements InterfacePhone {
 	}
 
 	public void setScratchprotect(InterfaceScratchProtect scratchprotect) {
-		this.scratchprotect = scratchprotect;
+		this.scratchprotect = (ScratchProtect) scratchprotect;
 	}
 
 	public InterfaceProcessor getProcessor() {
@@ -393,7 +533,7 @@ public class Phone implements InterfacePhone {
 	}
 
 	public void setProcessor(InterfaceProcessor processor) {
-		this.processor = processor;
+		this.processor = (Processor) processor;
 	}
 
 	public double getProcessorFrequency() {
@@ -445,11 +585,11 @@ public class Phone implements InterfacePhone {
 	}
 
 	public boolean isShockResistanceEsnclosure() {
-		return shockResistanceEsnclosure;
+		return shockResistanceEnclosure;
 	}
 
-	public void setShockResistanceEsnclosure(boolean shockResistanceEsnclosure) {
-		this.shockResistanceEsnclosure = shockResistanceEsnclosure;
+	public void setShockResistanceEsnclosure(boolean shockResistanceEnclosure) {
+		this.shockResistanceEnclosure = shockResistanceEnclosure;
 	}
 
 	public boolean isDustProtection() {
@@ -597,11 +737,11 @@ public class Phone implements InterfacePhone {
 	}
 
 	public boolean isInfrared() {
-		return Infrared;
+		return infrared;
 	}
 
 	public void setInfrared(boolean infrared) {
-		Infrared = infrared;
+		this.infrared = infrared;
 	}
 
 	public double getTimeSpeak() {
@@ -689,15 +829,15 @@ public class Phone implements InterfacePhone {
 	}
 
 	public void setManufacturer(InterfaceManufacturer manufacturer) {
-		this.manufacturer = manufacturer;
+		this.manufacturer = (Manufacturer) manufacturer;
 	}
 
-	public InterfaceBatteryType getBatteryType() {
-		return batteryType;
+	public InterfaceSimpleDAO getBatteryType() {
+		return (InterfaceSimpleDAO) batteryType;
 	}
 
-	public void setBatteryType(InterfaceBatteryType batteryType) {
-		this.batteryType = batteryType;
+	public void setBatteryType(InterfaceSimpleDAO batteryType) {
+		this.batteryType = (BatteryType) batteryType;
 	}
 
 	public InterfaceSIMCardFormat getSimCardFormat() {
@@ -705,7 +845,7 @@ public class Phone implements InterfacePhone {
 	}
 
 	public void setSimCardFormat(InterfaceSIMCardFormat simCardFormat) {
-		this.simCardFormat = simCardFormat;
+		this.simCardFormat = (SimCardFormat) simCardFormat;
 	}
 
 	public boolean isNonRemovableBattery() {
@@ -716,19 +856,19 @@ public class Phone implements InterfacePhone {
 		this.nonRemovableBattery = nonRemovableBattery;
 	}
 
-	public HashSet<InterfacePhoto> getPhotos() {
+	public Set<Photo> getPhotos() {
 		return photos;
 	}
 
-	public void setPhotos(HashSet<InterfacePhoto> photos) {
+	public void setPhotos(Set<Photo> photos) {
 		this.photos = photos;
 	}
 	
-	public void setPhoto(InterfacePhoto photo) {
+	public void setPhoto(Photo photo) {
 		this.photos.add(photo);
 	}		
 
-	public HashSet<InterfacePrice> getPrices() {
+	public Set<Price> getPrices() {
 		return prices;
 	}
 	
@@ -755,10 +895,10 @@ public class Phone implements InterfacePhone {
 		return priceWithDiscount;
 	}		
 
-	public void setPrices(HashSet<InterfacePrice> prices) {
+	public void setPrices(HashSet<Price> prices) {
 		this.prices = prices;
 	}
-	public void setPrice(InterfacePrice price) {
+	public void setPrice(Price price) {
 		this.prices.add(price);
 	}
 

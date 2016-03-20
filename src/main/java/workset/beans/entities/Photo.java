@@ -1,11 +1,28 @@
 package workset.beans.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
 import workset.beans.interfaces.InterfacePhoto;
 
+@Entity
+@Table( name = "photo")
 public class Photo implements InterfacePhoto {
+	@Id
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
+	
+	@Column(name = "name")
+	@Size(min=0, max=150)
 	private String name;
+	
+	@Column(name = "comment")
 	private String comment;
+	
+	@Column(name = "ismain")
 	private boolean isMain;
 	
 	public Photo(int id, String name, String comment) {

@@ -2,27 +2,42 @@ package workset.beans.entities;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import workset.beans.interfaces.InterfacePrice;
 import workset.beans.interfaces.InterfaceUser;
-import workset.beans.interfaces.base.InterfaceGood;
+import workset.beans.entities.User;
 
+@Entity
+@Table( name = "prices")
 public class Price implements InterfacePrice{
+	
+	@Id
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
+	
+	@Column(name = "time")
 	private Date time;
+	
+	@Column(name = "price")
 	private double price;
-	private InterfaceGood good;
-	private InterfaceUser user;
+
+	@ManyToOne
+	private User user;
 	
 	public Price(){
 	}
 
-	public Price(int id, Date date, double price, InterfaceGood good, User user) {
+	public Price(int id, Date date, double price, User user) {
 		super();
 		this.id = id;
 		this.time = date;
 		this.price = price;
 		this.user = user;
-		this.good = good;
 	}
 
 	/**
@@ -53,7 +68,7 @@ public class Price implements InterfacePrice{
 	/**
 	 * @param user the user to set
 	 */
-	public void setUser(InterfaceUser user) {
+	public void setUser(User user) {
 		this.user = user;
 	}
 
@@ -84,22 +99,5 @@ public class Price implements InterfacePrice{
 	public void setPrice(double price) {
 		this.price = price;
 	}
-
-	/**
-	 * @return the brakingFluid
-	 */
-	public InterfaceGood getGood() {
-		return good;
-	}
-
-	/**
-	 * @param brakingFluid the brakingFluid to set
-	 */
-	public void setGood(InterfaceGood good) {
-		this.good = good;
-	}
-
-	
-	
 
 }

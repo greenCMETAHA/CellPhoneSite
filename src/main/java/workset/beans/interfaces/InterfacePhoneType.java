@@ -1,5 +1,7 @@
 package workset.beans.interfaces;
 
-public interface InterfacePhoneType {
+import java.io.Serializable;
+
+public interface InterfacePhoneType extends Serializable {
 
 }

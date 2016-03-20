@@ -1,5 +1,7 @@
 package workset.beans.interfaces;
 
-public interface InterfaceManufacturer   {
+import java.io.Serializable;
+
+public interface InterfaceManufacturer extends Serializable  {
 
 }

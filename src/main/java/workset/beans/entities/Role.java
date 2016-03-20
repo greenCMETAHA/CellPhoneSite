@@ -1,14 +1,23 @@
 package workset.beans.entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-import workset.Services.Service;
+import workset.services.Service;
 import workset.beans.interfaces.InterfaceRole;
 
+@Entity
+@Table( name = "roles")
 public class Role implements InterfaceRole{
+	@Id
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 	
-	@Size(min = 0, max = 45)
+	@Column(name = "name")
+	@Size(min=0, max=45)
 	private String name;
 	
 	public Role() {

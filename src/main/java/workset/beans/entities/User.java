@@ -1,26 +1,52 @@
 package workset.beans.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
-import workset.Services.Service;
+import workset.services.Service;
 import workset.beans.interfaces.InterfaceRole;
 import workset.beans.interfaces.InterfaceUser;
 
+@Entity
+@Table( name = "users")
 public class User implements InterfaceUser{
+	@Id
+	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 	
-	@Size(min = 0, max = 45)
+	@Column(name = "name")
+	@Size(min=0, max=45)
 	private String name;
 	
+	@Column(name = "email")
 	@Size(min = 0, max = 45)
 	private String email;
 	
+	@Column(name = "login")
 	@Size(min = 0, max = 45)
 	private String login;
 	
+	@Column(name = "password")
 	@Size(min = 0, max = 45)
 	private String password;
-	private InterfaceRole role;
+	
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "usertable"
+		, joinColumns = { @JoinColumn(name = "user_id", nullable = false, updatable = false) }
+		, inverseJoinColumns = { @JoinColumn(name = "role_id", nullable = false, updatable = false) })	
+	private Set<Role> role;
 	
 	public User(){
 		id=0;
@@ -28,7 +54,7 @@ public class User implements InterfaceUser{
 		email="";
 		login="";
 		password="";
-		role = new Role();
+		role = new HashSet<Role>();
 	}
 	
 	public User(int id, String name, String email, String login, String password, Role role) {
@@ -38,8 +64,20 @@ public class User implements InterfaceUser{
 		setEmail(email);
 		setLogin(login);
 		setPassword(password);
-		this.role = (InterfaceRole)role;
+		this.role = new HashSet<Role>();
+		this.role.add(role);
 	}
+
+	public User(int id, String name, String email, String login, String password, HashSet<Role> role) {
+		super();
+		this.id = id;
+		setName(name);
+		setEmail(email);
+		setLogin(login);
+		setPassword(password);
+		this.role = role;
+	}
+	
 	
 	public User(int id, String name, String email, String login) {
 		super();
@@ -118,7 +156,7 @@ public class User implements InterfaceUser{
 	/**
 	 * @return the role
 	 */
-	public InterfaceRole getRole() {
+	public Set<Role> getRole() {
 		return role;
 	}
 
@@ -126,8 +164,13 @@ public class User implements InterfaceUser{
 	 * @param role the role to set
 	 */
 	public void setRole(InterfaceRole role) {
-		this.role = role;
+		this.role.add((Role) role);
 	}
+	
+	public void setRole(HashSet<Role> role) {
+		this.role=role;
+	}
+		
 	
 	public boolean isEmpty(){
 		boolean result=false;
@@ -137,123 +180,7 @@ public class User implements InterfaceUser{
 		return result; 
 	}
 	
-	public boolean canAddNewElement(){
-		boolean result=false;
 		
-		Role currentRole=(Role)role;
-		if (currentRole.getId()>0){
-			if ("admin".equals(currentRole.getName()) || ("saler".equals(currentRole.getName()) || ("product".equals(currentRole.getName())))){
-				result=true;
-			}
-		}
-		
-		return result; 
-	}
-	
-	public boolean canChangePrice(){
-		boolean result=false;
-		
-		Role currentRole=(Role)role;
-		if (currentRole.getId()>0){
-			if (("ROLE_OFFERPRISE".equals(currentRole.getName()))   || ("ROLE_DESTR".equals(currentRole.getName()))
-					|| ("ROLE_PRICE".equals(currentRole.getName())) || ("ROLE_ADMIN".equals(currentRole.getName())) 
-						|| ("admin".equals(currentRole.getName()))  || ("price".equals(currentRole.getName()))){
-				result=true;
-			}
-		}
-		
-		return result; 
-	}	
-	
-	public boolean isSalesManager(){
-		boolean result=false;
-		
-		Role currentRole=(Role)role;
-		if (currentRole.getId()>0){
-			if (("admin".equals(currentRole.getName())) || ("distribution".equals(currentRole.getName()))){
-				result=true;
-			}
-		}
-		
-		return result; 
-	}
-	
-	public boolean isWithoutLogin(){
-		boolean result=false;
-		
-		Role currentRole=(Role)role;
-		if (currentRole.getId()>0){
-			if (("admin".equals(currentRole.getName())) || (currentRole.getName().length()==0) || ("offer".equals(currentRole.getName()))){
-				result=true;
-			}
-		}
-		
-		return result; 
-	}	
-	
-	public boolean isOfferPrice(){
-		boolean result=false;
-		
-		Role currentRole=(Role)role;
-		if (currentRole.getId()>0){
-			if (("admin".equals(currentRole.getName())) || ("offer+price".equals(currentRole.getName()))){
-				result=true;
-			}
-		}
-		
-		return result; 
-	}		
-	
-	public boolean showSelection(){
-		boolean result=false;
-		
-		Role currentRole=(Role)role;
-		if (currentRole.getId()>0){
-			result=true;
-		}
-		
-		return result; 
-	}	
-	
-	public boolean createBussinessOffer(){
-		boolean result=false;
-		
-		Role currentRole=(Role)role;
-		if (currentRole.getId()>0){
-			if (("admin".equals(currentRole.getName())) || ("saler".equals(currentRole.getName()))){
-				result=true;
-			}
-		}
-		
-		return result; 
-	}	
-	
-	public boolean createDemand(){
-		boolean result=false;
-		
-		Role currentRole=(Role)role;
-		if (currentRole.getId()>0){
-			if (("admin".equals(currentRole.getName())) || ("dealer".equals(currentRole.getName()))){
-				result=true;
-			}
-		}
-		
-		return result; 
-	}	
-	
-	public boolean loadData(){
-		boolean result=false;
-		
-		Role currentRole=(Role)role;
-		if (currentRole.getId()>0){
-			if ("admin".equals(currentRole.getName())){
-				result=true;
-			}
-		}
-		
-		return result; 
-	}	
-	
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
