@@ -7,7 +7,10 @@ import org.apache.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import workset.beans.entities.BatteryType;
 import workset.beans.entities.Role;
@@ -18,7 +21,11 @@ import workset.dao.utils.HibernateUtil;
 import workset.services.ConstantsGroup;
 import workset.services.WorkLog;
 
+@Repository
 public class UserDAO extends DAO implements InterfaceUserDAO {
+	@Autowired
+	private SessionFactory sessionFactory;
+	
     private static UserDAO sessionDAO;
 
     private static Logger log = Logger.getLogger(DAO.class);

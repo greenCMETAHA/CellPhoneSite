@@ -9,6 +9,7 @@ import workset.beans.entities.Price;
 import workset.dao.dao.exceptions.DAOException;
 
 public interface InterfacePhoneDAO extends Serializable, InterfaceDAO {
+
     ArrayList<Phone> getPhones() throws DAOException;
     Phone getPhone(int id) throws DAOException;	
 

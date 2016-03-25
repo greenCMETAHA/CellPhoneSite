@@ -17,11 +17,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 
-/**
- * User: yslabko
- * Date: 14.04.14
- * Time: 13:55
- */
 public class HibernateUtil {
     private static HibernateUtil util = null;
 
@@ -29,7 +24,7 @@ public class HibernateUtil {
 
     private SessionFactory sessionFactory = null;
 
-    private final ThreadLocal sessions = new ThreadLocal();
+  	private final ThreadLocal sessions = new ThreadLocal();
 
     private HibernateUtil() {
         try {
@@ -71,4 +66,31 @@ public class HibernateUtil {
         return util;
     }
 
+    public static HibernateUtil getUtil() {
+  		return util;
+  	}
+
+  	public static void setUtil(HibernateUtil util) {
+  		HibernateUtil.util = util;
+  	}
+
+  	public static Logger getLog() {
+  		return log;
+  	}
+
+  	public static void setLog(Logger log) {
+  		HibernateUtil.log = log;
+  	}
+
+  	public SessionFactory getSessionFactory() {
+  		return sessionFactory;
+  	}
+
+  	public void setSessionFactory(SessionFactory sessionFactory) {
+  		this.sessionFactory = sessionFactory;
+  	}
+
+  	public ThreadLocal getSessions() {
+  		return sessions;
+  	}    
 }

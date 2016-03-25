@@ -21,6 +21,7 @@ import java.util.List;
 public class DAO<T> implements InterfaceDAO<T> {
 	/* implemented from interface InterfaceDAO */
 
+	private SessionFactory sessionFactory;
     /* variable for working with class. Pattern Singleton*/
     private static DAO sessionDAO;
 
@@ -44,6 +45,10 @@ public class DAO<T> implements InterfaceDAO<T> {
             WorkLog.writeInLog("Can not open database");
 
         return sessionDAO;
+    }
+    
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
     
     public void saveOrUpdate(T t) throws DAOException{

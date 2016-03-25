@@ -24,6 +24,7 @@ import workset.beans.entities.SimCardFormat;
 import workset.dao.dao.exceptions.DAOException;
 
 public interface InterfaceSimpleDAO extends Serializable, InterfaceDAO {
+
 	ArrayList<BatteryType> getBatteryTypes() throws DAOException;
 	BatteryType getBatteryType(int id) throws DAOException;
 	
