@@ -4,8 +4,13 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <html>
 <body>
-	index
-	<br><br>
-	<a href="Catalog">Перейти к списку телефонов</a>
+
+	<form action="Select" method="POST">
+		Отборы по каталогу
+		<br>
+		<br>
+
+		<input name="search" type="submit" value="Отбор">
+	</form>
 </body>  
 </html>

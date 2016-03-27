@@ -4,8 +4,10 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <html>
 <body>
-	index
-	<br><br>
-	<a href="Catalog">Перейти к списку телефонов</a>
+	<table border="1">
+		<tr>
+			<td align="center" width="1036">Разработано: Васильченко Глеб, ака greenCMETAHA. 2016 г.</td>
+		</tr>	
+	</table>
 </body>  
 </html>

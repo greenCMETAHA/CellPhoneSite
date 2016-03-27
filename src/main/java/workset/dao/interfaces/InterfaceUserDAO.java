@@ -9,12 +9,12 @@ import workset.dao.dao.exceptions.DAOException;
 
 public interface InterfaceUserDAO extends Serializable, InterfaceDAO{
 
-	ArrayList<Role> getRoles() throws DAOException;
-	ArrayList<Role> getRolesForUser(User user) throws DAOException;
+	ArrayList<Role> getRoles();
+	ArrayList<Role> getRolesForUser(User user);
 	
-	Role getRole(int id) throws DAOException;
+	Role getRole(int id);
 	
-	ArrayList<User> getUsers() throws DAOException;
-	User getUser(int id) throws DAOException;
+	ArrayList<User> getUsers();
+	User getUser(int id);
 	
 }

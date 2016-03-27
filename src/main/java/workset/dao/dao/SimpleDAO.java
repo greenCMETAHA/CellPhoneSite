@@ -27,6 +27,7 @@ import workset.beans.entities.Processor;
 import workset.beans.entities.ScratchProtect;
 import workset.beans.entities.ScreenResolution;
 import workset.beans.entities.ScreenTechnology;
+import workset.beans.entities.Shop;
 import workset.beans.entities.SimCardFormat;
 import workset.dao.dao.exceptions.DAOException;
 import workset.dao.interfaces.InterfaceSimpleDAO;
@@ -65,7 +66,7 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
     }	 
 
 	 @Override
-     public BatteryType getBatteryType(int id)  throws DAOException{
+     public BatteryType getBatteryType(int id) {
     	BatteryType result=new BatteryType();
 
          HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -84,13 +85,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         	 System.out.println(e);
              log.error("Error: can't getBatteryType("+id+"): " + e);
              transaction.rollback();
-             throw new DAOException(e);
+             // throw new DAOException(e);
          }
     	return result;
     }
 	 
 	 @Override  
-     public ArrayList<BatteryType> getBatteryTypes() throws DAOException{
+     public ArrayList<BatteryType> getBatteryTypes(){
     	ArrayList<BatteryType> result=new ArrayList<BatteryType>();
 
     	HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -105,14 +106,14 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         	System.out.println(e);
 	        log.error("Error: can't getBatteryTypes(): " + e);
 	        transaction.rollback();
-	        throw new DAOException(e);
+	        // throw new DAOException(e);
         }
         return result;
     	
      }
 
 	 @Override
-	 public ArrayList<Manufacturer> getManufacturers() throws DAOException {
+	 public ArrayList<Manufacturer> getManufacturers() {
 			ArrayList<Manufacturer> result=new ArrayList<Manufacturer>();
 
 	    	HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -127,13 +128,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
 	        	System.out.println(e);
 		        log.error("Error: can't getManufacturers(): " + e);
 		        transaction.rollback();
-		        throw new DAOException(e);
+		        // throw new DAOException(e);
 	        }
 	        return result;
 		}
 
 	 @Override
-	public Manufacturer getManufacturer(int manufacturer_id) throws DAOException {
+	public Manufacturer getManufacturer(int manufacturer_id) {
 		Manufacturer result=new Manufacturer();
 
         HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -152,13 +153,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
        	 System.out.println(e);
             log.error("Error: can't getManufacturer("+manufacturer_id+"): " + e);
             transaction.rollback();
-            throw new DAOException(e);
+            // throw new DAOException(e);
         }
         return result;
 	}
 
 	@Override
-	public ArrayList<BodyColor> getBodyColors() throws DAOException {
+	public ArrayList<BodyColor> getBodyColors() {
 		ArrayList<BodyColor> result=new ArrayList<BodyColor>();
 
     	HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -173,13 +174,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         	System.out.println(e);
 	        log.error("Error: can't getBodyColors(): " + e);
 	        transaction.rollback();
-	        throw new DAOException(e);
+	        // throw new DAOException(e);
         }
         return result;
 	}
 
 	@Override
-	public BodyColor getBodyColor(int id) throws DAOException {
+	public BodyColor getBodyColor(int id) {
 		BodyColor result=new BodyColor();
 
         HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -198,13 +199,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
        	 System.out.println(e);
             log.error("Error: can't getBodyColor("+id+"): " + e);
             transaction.rollback();
-            throw new DAOException(e);
+            // throw new DAOException(e);
         }
         return result;	
     }
 
 	@Override
-	public ArrayList<BodyStuff> getBodyStuff() throws DAOException {
+	public ArrayList<BodyStuff> getBodyStuff() {
 		ArrayList<BodyStuff> result=new ArrayList<BodyStuff>();
 
     	HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -219,13 +220,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         	System.out.println(e);
 	        log.error("Error: can't getBodyStuff(): " + e);
 	        transaction.rollback();
-	        throw new DAOException(e);
+	        // throw new DAOException(e);
         }
         return result;
 	}
 
 	@Override
-	public BodyStuff getBodyStuff(int id) throws DAOException {
+	public BodyStuff getBodyStuff(int id) {
 		BodyStuff result=new BodyStuff();
 
         HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -244,13 +245,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
        	 System.out.println(e);
             log.error("Error: can't getBodyStuff("+id+"): " + e);
             transaction.rollback();
-            throw new DAOException(e);
+            // throw new DAOException(e);
         }
         return result;	
 	}
 
 	@Override
-	public ArrayList<BodyType> getBodyTypes() throws DAOException {
+	public ArrayList<BodyType> getBodyTypes() {
 		ArrayList<BodyType> result=new ArrayList<BodyType>();
 
     	HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -265,13 +266,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         	System.out.println(e);
 	        log.error("Error: can't getBodyType(): " + e);
 	        transaction.rollback();
-	        throw new DAOException(e);
+	        // throw new DAOException(e);
         }
         return result;	
     }
 
 	@Override
-	public BodyType getBodyType(int id) throws DAOException {
+	public BodyType getBodyType(int id) {
 		BodyType result=new BodyType();
 
         HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -290,13 +291,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
        	 System.out.println(e);
             log.error("Error: can't getBodyType("+id+"): " + e);
             transaction.rollback();
-            throw new DAOException(e);
+            // throw new DAOException(e);
         }
         return result;		
     }
 
 	@Override
-	public ArrayList<Country> getCountries() throws DAOException {
+	public ArrayList<Country> getCountries() {
 		ArrayList<Country> result=new ArrayList<Country>();
 
     	HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -311,13 +312,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         	System.out.println(e);
 	        log.error("Error: can't getCountries(): " + e);
 	        transaction.rollback();
-	        throw new DAOException(e);
+	        // throw new DAOException(e);
         }
         return result;	
 	}
 
 	@Override
-	public Country getCountry(int id) throws DAOException {
+	public Country getCountry(int id) {
 		Country result=new Country();
 
         HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -336,13 +337,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
        	 System.out.println(e);
             log.error("Error: can't getCountry("+id+"): " + e);
             transaction.rollback();
-            throw new DAOException(e);
+            // throw new DAOException(e);
         }
         return result;		
 	}
 
 	@Override
-	public ArrayList<Customer> getCustomers() throws DAOException {
+	public ArrayList<Customer> getCustomers() {
 		ArrayList<Customer> result=new ArrayList<Customer>();
 
     	HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -357,14 +358,14 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         	System.out.println(e);
 	        log.error("Error: can't getCustomers(): " + e);
 	        transaction.rollback();
-	        throw new DAOException(e);
+	        // throw new DAOException(e);
         }
         return result;	
 
 	}
 
 	@Override
-	public Customer getCustomer(int id) throws DAOException {
+	public Customer getCustomer(int id) {
 		Customer result=new Customer();
 
         HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -383,13 +384,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
        	 System.out.println(e);
             log.error("Error: can't getCustomer("+id+"): " + e);
             transaction.rollback();
-            throw new DAOException(e);
+            // throw new DAOException(e);
         }
         return result;		
 	}
 
 	@Override
-	public ArrayList<Os> getOses() throws DAOException {
+	public ArrayList<Os> getOses() {
 		ArrayList<Os> result=new ArrayList<Os>();
 
     	HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -404,13 +405,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         	System.out.println(e);
 	        log.error("Error: can't getOses(): " + e);
 	        transaction.rollback();
-	        throw new DAOException(e);
+	        // throw new DAOException(e);
         }
         return result;	
 	}
 
 	@Override
-	public Os getOs(int id) throws DAOException {
+	public Os getOs(int id) {
 		Os result=new Os();
 
         HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -429,13 +430,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
        	 System.out.println(e);
             log.error("Error: can't getOs("+id+"): " + e);
             transaction.rollback();
-            throw new DAOException(e);
+            // throw new DAOException(e);
         }
         return result;		
 	}
 
 	@Override
-	public ArrayList<PhoneType> getPhoneTypes() throws DAOException {
+	public ArrayList<PhoneType> getPhoneTypes() {
 		ArrayList<PhoneType> result=new ArrayList<PhoneType>();
 
     	HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -450,13 +451,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         	System.out.println(e);
 	        log.error("Error: can't getPhoneTypes(): " + e);
 	        transaction.rollback();
-	        throw new DAOException(e);
+	        // throw new DAOException(e);
         }
         return result;	
 	}
 
 	@Override
-	public PhoneType getPhoneType(int id) throws DAOException {
+	public PhoneType getPhoneType(int id) {
 		PhoneType result=new PhoneType();
 
         HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -475,13 +476,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
        	 System.out.println(e);
             log.error("Error: can't getPhoneType("+id+"): " + e);
             transaction.rollback();
-            throw new DAOException(e);
+            // throw new DAOException(e);
         }
         return result;		
 	}
 
 	@Override
-	public ArrayList<Processor> getProcessors() throws DAOException {
+	public ArrayList<Processor> getProcessors() {
 		ArrayList<Processor> result=new ArrayList<Processor>();
 
     	HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -496,13 +497,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         	System.out.println(e);
 	        log.error("Error: can't getProcessor(): " + e);
 	        transaction.rollback();
-	        throw new DAOException(e);
+	        // throw new DAOException(e);
         }
         return result;	
 	}
 
 	@Override
-	public Processor getProcessor(int id) throws DAOException {
+	public Processor getProcessor(int id) {
 		Processor result=new Processor();
 
         HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -521,13 +522,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
        	 System.out.println(e);
             log.error("Error: can't getProcessor("+id+"): " + e);
             transaction.rollback();
-            throw new DAOException(e);
+            // throw new DAOException(e);
         }
         return result;		
 	}
 
 	@Override
-	public ArrayList<ScratchProtect> getScratchProtects() throws DAOException {
+	public ArrayList<ScratchProtect> getScratchProtects() {
 		ArrayList<ScratchProtect> result=new ArrayList<ScratchProtect>();
 
     	HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -542,13 +543,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         	System.out.println(e);
 	        log.error("Error: can't getScratchProtects(): " + e);
 	        transaction.rollback();
-	        throw new DAOException(e);
+	        // throw new DAOException(e);
         }
         return result;	
 	}
 
 	@Override
-	public ScratchProtect getScratchProtect(int id) throws DAOException {
+	public ScratchProtect getScratchProtect(int id) {
 		ScratchProtect result=new ScratchProtect();
 
         HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -567,13 +568,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
        	 System.out.println(e);
             log.error("Error: can't getScratchProtect("+id+"): " + e);
             transaction.rollback();
-            throw new DAOException(e);
+            // throw new DAOException(e);
         }
         return result;		
 	}
 
 	@Override
-	public ArrayList<ScreenResolution> getScreenResolutions() throws DAOException {
+	public ArrayList<ScreenResolution> getScreenResolutions() {
 		ArrayList<ScreenResolution> result=new ArrayList<ScreenResolution>();
 
     	HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -588,13 +589,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         	System.out.println(e);
 	        log.error("Error: can't getScreenResolutions(): " + e);
 	        transaction.rollback();
-	        throw new DAOException(e);
+	        // throw new DAOException(e);
         }
         return result;	
 	}
 
 	@Override
-	public ScreenResolution getScreenResolution(int id) throws DAOException {
+	public ScreenResolution getScreenResolution(int id) {
 		ScreenResolution result=new ScreenResolution();
 
         HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -613,13 +614,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
        	 System.out.println(e);
             log.error("Error: can't getScreenResolution("+id+"): " + e);
             transaction.rollback();
-            throw new DAOException(e);
+            // throw new DAOException(e);
         }
         return result;		
 	}
 
 	@Override
-	public ArrayList<ScreenTechnology> getScreenTechnologies() throws DAOException {
+	public ArrayList<ScreenTechnology> getScreenTechnologies() {
 		ArrayList<ScreenTechnology> result=new ArrayList<ScreenTechnology>();
 
     	HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -634,13 +635,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         	System.out.println(e);
 	        log.error("Error: can't getScreenTechnologies(): " + e);
 	        transaction.rollback();
-	        throw new DAOException(e);
+	        // throw new DAOException(e);
         }
         return result;	
 	}
 
 	@Override
-	public ScreenTechnology getScreenTechnology(int id) throws DAOException {
+	public ScreenTechnology getScreenTechnology(int id) {
 		ScreenTechnology result=new ScreenTechnology();
 
         HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -659,13 +660,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
        	 System.out.println(e);
             log.error("Error: can't getScreenTechnology("+id+"): " + e);
             transaction.rollback();
-            throw new DAOException(e);
+            // throw new DAOException(e);
         }
         return result;		
 	}
 
 	@Override
-	public ArrayList<SimCardFormat> getSimCardFormats() throws DAOException {
+	public ArrayList<SimCardFormat> getSimCardFormats() {
 		ArrayList<SimCardFormat> result=new ArrayList<SimCardFormat>();
 
     	HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -680,13 +681,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         	System.out.println(e);
 	        log.error("Error: can't getSimCardFormats(): " + e);
 	        transaction.rollback();
-	        throw new DAOException(e);
+	        // throw new DAOException(e);
         }
         return result;	
 	}
 
 	@Override
-	public SimCardFormat getSimCardFormat(int id) throws DAOException {
+	public SimCardFormat getSimCardFormat(int id) {
 		SimCardFormat result=new SimCardFormat();
 
         HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -705,13 +706,13 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
        	 System.out.println(e);
             log.error("Error: can't getSimCardFormat("+id+"): " + e);
             transaction.rollback();
-            throw new DAOException(e);
+            // throw new DAOException(e);
         }
         return result;		
 	}
     
 	@Override
-	public String getInfo(String valueName) throws DAOException{
+	public String getInfo(String valueName){
 		String result="";
 		
 		HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -730,14 +731,14 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
        	 System.out.println(e);
             log.error("Error: can't getInfo("+valueName+"): " + e);
             transaction.rollback();
-            throw new DAOException(e);
+            // throw new DAOException(e);
         }
 		
 		return result;	
 	}
 	
 	@Override
-	public ArrayList<Log> getLog(int pageNumber, int lastQuantity) throws DAOException{
+	public ArrayList<Log> getLog(int pageNumber, int lastQuantity){
 		ArrayList<Log> result=new ArrayList<Log>();
 		
 		HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -754,7 +755,7 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
        	 System.out.println(e);
             log.error("Error: can't getLog("+lastQuantity+"): " + e);
             transaction.rollback();
-            throw new DAOException(e);
+            // throw new DAOException(e);
         }
 		
 		return result;			
@@ -762,10 +763,56 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
 	}
 	
 	@Override
-	public ArrayList<Log> getLog(int lastQuantity) throws DAOException{
+	public ArrayList<Log> getLog(int lastQuantity){
 		ArrayList<Log> result = getLog(0, lastQuantity);
 		
 		return result;	
+	}
+
+	@Override
+	public ArrayList<Shop> getShops() {
+		ArrayList<Shop> result=new ArrayList<Shop>();
+
+    	HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+
+        try {
+	        transaction = session.beginTransaction();
+	        Query query=session.createQuery("from Shop"); 
+	        result=(ArrayList)query.list();
+	        transaction.commit();
+        } catch (HibernateException e) {
+        	System.out.println(e);
+	        log.error("Error: can't getShops(): " + e);
+	        transaction.rollback();
+	        // throw new DAOException(e);
+        }
+        return result;	
+    }
+
+	@Override
+	public Shop getShop(int id) {
+		Shop result=new Shop();
+
+        HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+
+        try {
+            transaction = session.beginTransaction();
+            Query query=session.createQuery("from Shop where id=:valueID");
+            query.setParameter("valueID", id);
+            List <Shop> list=query.list();
+            if (list.size()>0) {
+                result=list.get(0);
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+       	 System.out.println(e);
+            log.error("Error: can't getShop("+id+"): " + e);
+            transaction.rollback();
+            // throw new DAOException(e);
+        }
+        return result;		
 	}
 	
 }

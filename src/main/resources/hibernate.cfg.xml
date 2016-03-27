@@ -29,6 +29,8 @@
 		<mapping class="workset.beans.entities.ScreenResolution" />
 		<mapping class="workset.beans.entities.ScreenTechnology" />
 		<mapping class="workset.beans.entities.SimCardFormat" />
+		
+		<mapping class="workset.beans.entities.Shop" />
 
 		<mapping class="workset.beans.entities.User" />
 		<mapping class="workset.beans.entities.Role" />		

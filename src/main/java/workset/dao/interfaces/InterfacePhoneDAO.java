@@ -10,14 +10,15 @@ import workset.dao.dao.exceptions.DAOException;
 
 public interface InterfacePhoneDAO extends Serializable, InterfaceDAO {
 
-    ArrayList<Phone> getPhones() throws DAOException;
-    Phone getPhone(int id) throws DAOException;	
+	ArrayList<Phone> getPhones();
+	ArrayList<Phone> getPhones(int page);
+    Phone getPhone(int id);	
 
-    ArrayList<Photo> getPhotos(Phone phone) throws DAOException;
-    Photo getMainPhoto(Phone phone) throws DAOException;
-    Photo getPhoto(int id) throws DAOException;
+    ArrayList<Photo> getPhotos(Phone phone);
+    Photo getMainPhoto(Phone phone);
+    Photo getPhoto(int id);
 
-    ArrayList<Price> getPrices(Phone phone) throws DAOException;
-    Price getLastPrice(Phone phone) throws DAOException;
-    Price getPrice(int id) throws DAOException;
+    ArrayList<Price> getPrices(Phone phone);
+    Price getLastPrice(Phone phone);
+    Price getPrice(int id);
 }

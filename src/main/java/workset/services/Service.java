@@ -13,6 +13,7 @@ public class Service {
 	public static String EMPTY="<empty>";
 	public static int ID_EMPTY_CUSTOMER=0;
 	public static int LOG_ON_PAGE=20;
+	public static int ELEMENTS_ON_PAGE=10;
 	
 	public Service(){
 		

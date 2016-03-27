@@ -20,55 +20,59 @@ import workset.beans.entities.Processor;
 import workset.beans.entities.ScratchProtect;
 import workset.beans.entities.ScreenResolution;
 import workset.beans.entities.ScreenTechnology;
+import workset.beans.entities.Shop;
 import workset.beans.entities.SimCardFormat;
 import workset.dao.dao.exceptions.DAOException;
 
 public interface InterfaceSimpleDAO extends Serializable, InterfaceDAO {
 
-	ArrayList<BatteryType> getBatteryTypes() throws DAOException;
-	BatteryType getBatteryType(int id) throws DAOException;
+	ArrayList<BatteryType> getBatteryTypes();
+	BatteryType getBatteryType(int id);
 	
-	ArrayList<Manufacturer> getManufacturers() throws DAOException;
-    Manufacturer getManufacturer(int id) throws DAOException;
+	ArrayList<Manufacturer> getManufacturers();
+    Manufacturer getManufacturer(int id);
     
-	ArrayList<BodyColor> getBodyColors() throws DAOException;
-	BodyColor getBodyColor(int id) throws DAOException;   
+	ArrayList<BodyColor> getBodyColors();
+	BodyColor getBodyColor(int id);   
 
-	ArrayList<BodyStuff> getBodyStuff() throws DAOException;
-	BodyStuff getBodyStuff(int id) throws DAOException;
+	ArrayList<BodyStuff> getBodyStuff();
+	BodyStuff getBodyStuff(int id);
     
-    ArrayList<BodyType> getBodyTypes() throws DAOException;
-    BodyType getBodyType(int id) throws DAOException;	
+    ArrayList<BodyType> getBodyTypes();
+    BodyType getBodyType(int id);	
     
-    ArrayList<Country> getCountries() throws DAOException;
-    Country getCountry(int id) throws DAOException;
+    ArrayList<Country> getCountries();
+    Country getCountry(int id);
     
-    ArrayList<Customer> getCustomers() throws DAOException;
-    Customer getCustomer(int id) throws DAOException;
+    ArrayList<Customer> getCustomers();
+    Customer getCustomer(int id);
   
-    ArrayList<Os> getOses() throws DAOException;
-    Os getOs(int id) throws DAOException;
+    ArrayList<Os> getOses();
+    Os getOs(int id);
     
-    ArrayList<PhoneType> getPhoneTypes() throws DAOException;
-    PhoneType getPhoneType(int id) throws DAOException;
+    ArrayList<PhoneType> getPhoneTypes();
+    PhoneType getPhoneType(int id);
    
-    ArrayList<Processor> getProcessors() throws DAOException;
-    Processor getProcessor(int id) throws DAOException;
+    ArrayList<Processor> getProcessors();
+    Processor getProcessor(int id);
 
-    ArrayList<ScratchProtect> getScratchProtects() throws DAOException;
-    ScratchProtect getScratchProtect(int id) throws DAOException;
+    ArrayList<ScratchProtect> getScratchProtects();
+    ScratchProtect getScratchProtect(int id);
 
-    ArrayList<ScreenResolution> getScreenResolutions() throws DAOException;
-    ScreenResolution getScreenResolution(int id) throws DAOException;  
+    ArrayList<ScreenResolution> getScreenResolutions();
+    ScreenResolution getScreenResolution(int id);  
 
-    ArrayList<ScreenTechnology> getScreenTechnologies() throws DAOException;
-    ScreenTechnology getScreenTechnology(int id) throws DAOException;
+    ArrayList<ScreenTechnology> getScreenTechnologies();
+    ScreenTechnology getScreenTechnology(int id);
 
-    ArrayList<SimCardFormat> getSimCardFormats() throws DAOException;
-    SimCardFormat getSimCardFormat(int id) throws DAOException;
+    ArrayList<SimCardFormat> getSimCardFormats();
+    SimCardFormat getSimCardFormat(int id);
     
-    String getInfo(String name) throws DAOException;
+    ArrayList<Shop> getShops();
+    Shop getShop(int id);
     
-    ArrayList<Log> getLog(int lastQuantity) throws DAOException;
-    ArrayList<Log> getLog(int pageNum, int lastQuantity) throws DAOException;
+    String getInfo(String name);
+    
+    ArrayList<Log> getLog(int lastQuantity);
+    ArrayList<Log> getLog(int pageNum, int lastQuantity);
 }

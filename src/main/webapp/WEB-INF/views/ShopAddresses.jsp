@@ -4,8 +4,18 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <html>
 <body>
-	index
-	<br><br>
-	<a href="Catalog">Перейти к списку телефонов</a>
+	Наши магазины:
+	
+	<br><hr><br>
+	<div>
+		<ul>
+			<c:forEach var="current" items="${requestScope.list}">
+				<li><c:out value="${current.getName()}"/>, <c:out value="${current.getDescription()}"/></li>
+				
+			</c:forEach>
+		</ul>
+	</div>
+	<br><hr><br>
+	<a href="index">В начало</a>
 </body>  
 </html>

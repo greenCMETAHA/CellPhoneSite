@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC 
+  "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" 
+  "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+<tiles-definitions>
+    <!-- //Основной сайт. основные страницы с отборами и index -->
+    <definition name="baseWithSelectAndMenu.definition" template="/WEB-INF/views/tiles/mainTemplate.jsp">
+    	<put-attribute name="Header" value="/WEB-INF/views/tiles/Header.jsp"></put-attribute> 
+        <put-attribute name="Menu" value="/WEB-INF/views/tiles/Menu.jsp"></put-attribute>
+        <put-attribute name="Body" value=""></put-attribute>
+        <put-attribute name="Footer" value="/WEB-INF/views/tiles/Footer.jsp"></put-attribute>
+    </definition>
+    
+    <!-- //Основной сайт. основные страницы с отборами и index -->
+    <definition name="baseWithSelectAndSelect.definition" template="/WEB-INF/views/tiles/mainTemplate.jsp">
+    	<put-attribute name="Header" value="/WEB-INF/views/tiles/Header.jsp"></put-attribute> 
+        <put-attribute name="Menu" value="/WEB-INF/views/tiles/Select.jsp"></put-attribute>
+        <put-attribute name="Body" value=""></put-attribute>
+        <put-attribute name="Footer" value="/WEB-INF/views/tiles/Footer.jsp"></put-attribute>
+    </definition>
+ 
+ 
+     <definition name="About" extends="baseWithSelectAndMenu.definition">
+        <put-attribute name="Body" value="/WEB-INF/views/About.jsp"></put-attribute>
+    </definition>
+    
+     <definition name="Basket" extends="baseWithSelectAndMenu.definition">
+        <put-attribute name="Body" value="/WEB-INF/views/Basket.jsp"></put-attribute>
+    </definition>
+    
+     <definition name="index" extends="baseWithSelectAndMenu.definition">
+        <put-attribute name="Body" value="/WEB-INF/views/index.jsp"></put-attribute>
+    </definition>
+    
+     <definition name="Catalog" extends="baseWithSelectAndSelect.definition">
+        <put-attribute name="Body" value="/WEB-INF/views/Catalog.jsp"></put-attribute>
+    </definition>
+ 
+    <definition name="Profile" extends="baseWithSelectAndMenu.definition">
+        <put-attribute name="Body" value="/WEB-INF/views/Profile.jsp"></put-attribute>
+    </definition>
+
+    <definition name="ShopAddresses" extends="baseWithSelectAndMenu.definition">
+        <put-attribute name="Body" value="/WEB-INF/views/ShopAddresses.jsp"></put-attribute>
+    </definition>
+
+    <definition name="WayToPay" extends="baseWithSelectAndMenu.definition">
+        <put-attribute name="Body" value="/WEB-INF/views/WayToPay.jsp"></put-attribute>
+    </definition>
+
+   <definition name="Compare" extends="baseWithSelectAndMenu.definition">
+        <put-attribute name="Body" value="/WEB-INF/views/Compare.jsp"></put-attribute>
+    </definition>
+    
+   <definition name="AdminPanel" extends="baseWithSelectAndMenu.definition">
+        <put-attribute name="Body" value="/WEB-INF/views/AdminPanel.jsp"></put-attribute>
+    </definition>
+
+   <definition name="Page404" extends="baseWithSelectAndMenu.definition">
+        <put-attribute name="Body" value="/WEB-INF/views/Page404.jsp"></put-attribute>
+    </definition>
+
+   <definition name="ErrorPage" extends="baseWithSelectAndMenu.definition">
+        <put-attribute name="Body" value="/WEB-INF/views/ErrorPage.jsp"></put-attribute>
+    </definition>
+    
+ 
+</tiles-definitions>

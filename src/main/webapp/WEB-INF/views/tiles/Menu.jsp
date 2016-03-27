@@ -4,8 +4,11 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <html>
 <body>
-	index
-	<br><br>
-	<a href="Catalog">Перейти к списку телефонов</a>
+	<a href="About">О компании</a><br>
+	<a href="Catalog">Каталог</a><br>
+	<a href="AdminPanel">Конфигурирование</a><br>
+	<c:if test="${requestScope.isAdmin}">
+		дополнить...<br>
+	</c:if>
 </body>  
 </html>

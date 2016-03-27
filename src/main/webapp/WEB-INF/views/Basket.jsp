@@ -4,8 +4,8 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <html>
 <body>
-	index
+	Список покупок:
 	<br><br>
-	<a href="Catalog">Перейти к списку телефонов</a>
+	<a href="index">В начало</a>
 </body>  
 </html>

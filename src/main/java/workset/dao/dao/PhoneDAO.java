@@ -21,6 +21,7 @@ import workset.dao.interfaces.InterfacePhoneDAO;
 import workset.dao.interfaces.InterfaceSimpleDAO;
 import workset.dao.utils.HibernateUtil;
 import workset.services.ConstantsGroup;
+import workset.services.Service;
 import workset.services.WorkLog;
 
 @Repository
@@ -55,7 +56,7 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
     //----------------------------------------------------------------------
 
 	@Override
-	public ArrayList<Phone> getPhones() throws DAOException {
+	public ArrayList<Phone> getPhones() {
 		ArrayList<Phone> result=new ArrayList<Phone>();
 
     	HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -70,13 +71,40 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
         	System.out.println(e);
 	        log.error("Error: can't getPhones(): " + e);
 	        transaction.rollback();
-	        throw new DAOException(e);
+	        //			throw new DAOException(e);
         }
         return result;	
 	}
+	
 
 	@Override
-	public Phone getPhone(int id) throws DAOException {
+	public ArrayList<Phone> getPhones(int page) {
+		ArrayList<Phone> result=new ArrayList<Phone>();
+
+    	HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+        
+        int phonesOnPage=Service.ELEMENTS_ON_PAGE;
+
+        try {
+	        transaction = session.beginTransaction();
+	        Query query=session.createQuery("from Phone"); 
+	        query.setFirstResult((page-1)*phonesOnPage);
+	        query.setMaxResults(phonesOnPage);
+
+	        result=(ArrayList)query.list();
+	        transaction.commit();
+        } catch (HibernateException e) {
+        	System.out.println(e);
+	        log.error("Error: can't getPhones(): " + e);
+	        transaction.rollback();
+	        //			throw new DAOException(e);
+        }
+        return result;	
+	}	 	
+
+	@Override
+	public Phone getPhone(int id) {
 		Phone result=new Phone();
 
         HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -95,13 +123,13 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
        	 System.out.println(e);
             log.error("Error: can't getPhone("+id+"): " + e);
             transaction.rollback();
-            throw new DAOException(e);
+            //	throw new DAOException(e);
         }
         return result;
     }
 
 	@Override
-	public ArrayList<Photo> getPhotos(Phone phone) throws DAOException {
+	public ArrayList<Photo> getPhotos(Phone phone) {
 		ArrayList<Photo> result=new ArrayList<Photo>();
 
     	HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -117,13 +145,13 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
         	System.out.println(e);
 	        log.error("Error: can't getPhotos(): " + e);
 	        transaction.rollback();
-	        throw new DAOException(e);
+	        //throw new DAOException(e);
         }
         return result;	
 	}
 
 	@Override
-	public Photo getMainPhoto(Phone phone) throws DAOException {
+	public Photo getMainPhoto(Phone phone) {
 		Photo result=new Photo();
 
         HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -142,13 +170,13 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
        	 System.out.println(e);
             log.error("Error: can't getMainPhoto("+phone.getId()+", "+phone.getName()+"): " + e);
             transaction.rollback();
-            throw new DAOException(e);
+            //throw new DAOException(e);
         }
         return result;
 	}
 
 	@Override
-	public Photo getPhoto(int id) throws DAOException {
+	public Photo getPhoto(int id) {
 		Photo result=new Photo();
 
         HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -167,13 +195,13 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
        	 System.out.println(e);
             log.error("Error: can't getPhoto("+id+"): " + e);
             transaction.rollback();
-            throw new DAOException(e);
+            //throw new DAOException(e);
         }
         return result;
     }
 
 	@Override
-	public ArrayList<Price> getPrices(Phone phone) throws DAOException {
+	public ArrayList<Price> getPrices(Phone phone) {
 		ArrayList<Price> result=new ArrayList<Price>();
 
     	HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -189,13 +217,13 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
         	System.out.println(e);
 	        log.error("Error: can't getPrices("+phone.getId()+", "+phone.getName()+"): " + e);
 	        transaction.rollback();
-	        throw new DAOException(e);
+	        //throw new DAOException(e);
         }
         return result;	
     }
 
 	@Override
-	public Price getLastPrice(Phone phone) throws DAOException {
+	public Price getLastPrice(Phone phone) {
 		Price result=new Price();
 
         HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -214,13 +242,13 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
        	 System.out.println(e);
             log.error("Error: can't getLastPrice("+phone.getId()+", "+phone.getName()+"): " + e);
             transaction.rollback();
-            throw new DAOException(e);
+            //throw new DAOException(e);
         }
         return result;
     }
 
 	@Override
-	public Price getPrice(int id) throws DAOException {
+	public Price getPrice(int id) {
 		Price result=new Price();
 
         HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -239,8 +267,9 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
        	 System.out.println(e);
             log.error("Error: can't getPrice("+id+"): " + e);
             transaction.rollback();
-            throw new DAOException(e);
+            // throw new DAOException(e);
         }
         return result;
-    }	 
+    }
+
 }

@@ -53,7 +53,7 @@ public class UserDAO extends DAO implements InterfaceUserDAO {
     
     
 	@Override
-	public ArrayList<Role> getRoles() throws DAOException {
+	public ArrayList<Role> getRoles() {
     	ArrayList<Role> result=new ArrayList<Role>();
 
     	HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -68,13 +68,13 @@ public class UserDAO extends DAO implements InterfaceUserDAO {
         	System.out.println(e);
 	        log.error("Error: can't getRoles(): " + e);
 	        transaction.rollback();
-	        throw new DAOException(e);
+	        // throw new DAOException(e);
         }
         return result;
 	}
 
 	@Override
-	public ArrayList<Role> getRolesForUser(User user) throws DAOException {
+	public ArrayList<Role> getRolesForUser(User user) {
     	ArrayList<Role> result=new ArrayList<Role>();
     	
     	for (Role current:user.getRole()){
@@ -85,7 +85,7 @@ public class UserDAO extends DAO implements InterfaceUserDAO {
 	}
 
 	@Override
-	public Role getRole(int id) throws DAOException {
+	public Role getRole(int id) {
 		Role result=new Role();
 
         HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -104,13 +104,13 @@ public class UserDAO extends DAO implements InterfaceUserDAO {
        	 System.out.println(e);
             log.error("Error: can't getRole("+id+"): " + e);
             transaction.rollback();
-            throw new DAOException(e);
+            // throw new DAOException(e);
         }
         return result;
 	}
 
 	@Override
-	public ArrayList<User> getUsers() throws DAOException {
+	public ArrayList<User> getUsers() {
 	   	ArrayList<User> result=new ArrayList<User>();
 
     	HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -125,13 +125,13 @@ public class UserDAO extends DAO implements InterfaceUserDAO {
         	System.out.println(e);
 	        log.error("Error: can't getUsers(): " + e);
 	        transaction.rollback();
-	        throw new DAOException(e);
+	        // throw new DAOException(e);
         }
         return result;	
     }
 
 	@Override
-	public User getUser(int id) throws DAOException {
+	public User getUser(int id) {
 		User result=new User();
 
         HibernateUtil util = HibernateUtil.getHibernateUtil();
@@ -150,7 +150,7 @@ public class UserDAO extends DAO implements InterfaceUserDAO {
        	 System.out.println(e);
             log.error("Error: can't getUser("+id+"): " + e);
             transaction.rollback();
-            throw new DAOException(e);
+            // throw new DAOException(e);
         }
         return result;
 	}
