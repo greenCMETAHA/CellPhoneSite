@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import workset.beans.entities.Basket;
 import workset.beans.entities.Manufacturer;
 import workset.beans.entities.Phone;
 import workset.beans.entities.Shop;
 import workset.beans.entities.User;
+import workset.beans.interfaces.InterfaceBasket;
 import workset.beans.interfaces.base.InterfaceGood;
 import workset.dao.dao.PhoneDAO;
 import workset.dao.dao.SimpleDAO;
@@ -174,8 +176,8 @@ public class MainController {
 	//атрибуты сессии
 	
 	@ModelAttribute("basket")
-	public HashSet<InterfaceGood> createBasket(){
-		HashSet<InterfaceGood> result = new HashSet<InterfaceGood>();
+	public HashSet<Basket> createBasket(){
+		HashSet<Basket> result = new HashSet<Basket>();
 		
 		return result;
 	}

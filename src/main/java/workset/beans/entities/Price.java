@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
 
 import workset.beans.interfaces.InterfacePrice;
 import workset.beans.interfaces.InterfaceUser;
@@ -26,18 +27,27 @@ public class Price implements InterfacePrice{
 	@Column(name = "price")
 	private double price;
 
+	@Column(name = "goodPrefix")
+	@Size(min=3, max=3)
+	private String goodPrefix;
+
 	@ManyToOne
 	private User user;
+	
+	@ManyToOne
+	private Phone phone;
 	
 	public Price(){
 	}
 
-	public Price(int id, Date date, double price, User user) {
+	public Price(int id, Date date, double price, User user, String goodPrefix, Phone phone) {
 		super();
 		this.id = id;
 		this.time = date;
 		this.price = price;
 		this.user = user;
+		this.goodPrefix = goodPrefix;
+		this.phone = phone;
 	}
 
 	/**
@@ -98,6 +108,22 @@ public class Price implements InterfacePrice{
 	 */
 	public void setPrice(double price) {
 		this.price = price;
+	}
+
+	public String getGoodPrefix() {
+		return goodPrefix;
+	}
+
+	public void setGoodPrefix(String goodPrefix) {
+		this.goodPrefix = goodPrefix;
+	}
+
+	public Phone getPhone() {
+		return phone;
+	}
+
+	public void setPhone(Phone phone) {
+		this.phone = phone;
 	}
 
 }

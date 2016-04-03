@@ -38,7 +38,7 @@ public class Manufacturer implements InterfaceManufacturer{
 //	@Size(min = 0, max = 150)
 //	private int countryId;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional=true)
+	@ManyToOne(fetch = FetchType.EAGER, optional=true)
 	private Country country;
 	
 	public Manufacturer() {

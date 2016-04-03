@@ -90,6 +90,31 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
     	return result;
     }
 	 
+	 @Override
+     public BatteryType getBatteryType(String name) {
+    	BatteryType result=new BatteryType();
+
+         HibernateUtil util = HibernateUtil.getHibernateUtil();
+         Session session = util.getSession();
+
+         try {
+             transaction = session.beginTransaction();
+             Query query=session.createQuery("from BatteryType where name=:valueName");
+             query.setParameter("valueName", name);
+             List <BatteryType> list=query.list();
+             if (list.size()>0) {
+                 result=list.get(0);
+             }
+             transaction.commit();
+         } catch (HibernateException e) {
+        	 System.out.println(e);
+             log.error("Error: can't getBatteryType("+name+"): " + e);
+             transaction.rollback();
+             // throw new DAOException(e);
+         }
+    	return result;
+    }	 
+	 
 	 @Override  
      public ArrayList<BatteryType> getBatteryTypes(){
     	ArrayList<BatteryType> result=new ArrayList<BatteryType>();
@@ -157,6 +182,31 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         }
         return result;
 	}
+	 
+	@Override
+	public Manufacturer getManufacturer(String name) {
+		Manufacturer result=new Manufacturer();
+
+        HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+
+        try {
+            transaction = session.beginTransaction();
+            Query query=session.createQuery("from Manufacturer where name=:valueName");
+            query.setParameter("valueName", name);
+            List <Manufacturer> list=query.list();
+            if (list.size()>0) {
+                result=list.get(0);
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+       	 System.out.println(e);
+            log.error("Error: can't getManufacturer("+name+"): " + e);
+            transaction.rollback();
+            // throw new DAOException(e);
+        }
+        return result;
+	}	 
 
 	@Override
 	public ArrayList<BodyColor> getBodyColors() {
@@ -205,6 +255,32 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
     }
 
 	@Override
+	public BodyColor getBodyColor(String name) {
+		BodyColor result=new BodyColor();
+
+        HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+
+        try {
+            transaction = session.beginTransaction();
+            Query query=session.createQuery("from BodyColor where name=:valueName");
+            query.setParameter("valueName", name);
+            List <BodyColor> list=query.list();
+            if (list.size()>0) {
+                result=list.get(0);
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+       	 System.out.println(e);
+            log.error("Error: can't getBodyColor("+name+"): " + e);
+            transaction.rollback();
+            // throw new DAOException(e);
+        }
+        return result;	
+	}
+	
+
+	@Override
 	public ArrayList<BodyStuff> getBodyStuff() {
 		ArrayList<BodyStuff> result=new ArrayList<BodyStuff>();
 
@@ -249,6 +325,31 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         }
         return result;	
 	}
+	
+	@Override
+	public BodyStuff getBodyStuff(String name) {
+		BodyStuff result=new BodyStuff();
+
+        HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+
+        try {
+            transaction = session.beginTransaction();
+            Query query=session.createQuery("from BodyStuff where name=:valueName");
+            query.setParameter("valueName", name);
+            List <BodyStuff> list=query.list();
+            if (list.size()>0) {
+                result=list.get(0);
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+       	 System.out.println(e);
+            log.error("Error: can't getBodyStuff("+name+"): " + e);
+            transaction.rollback();
+            // throw new DAOException(e);
+        }
+        return result;	
+	}	
 
 	@Override
 	public ArrayList<BodyType> getBodyTypes() {
@@ -295,6 +396,31 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         }
         return result;		
     }
+	
+	@Override
+	public BodyType getBodyType(String name) {
+		BodyType result=new BodyType();
+
+        HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+
+        try {
+            transaction = session.beginTransaction();
+            Query query=session.createQuery("from BodyType where name=:valueName");
+            query.setParameter("valueName", name);
+            List <BodyType> list=query.list();
+            if (list.size()>0) {
+                result=list.get(0);
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+       	 System.out.println(e);
+            log.error("Error: can't getBodyType("+name+"): " + e);
+            transaction.rollback();
+            // throw new DAOException(e);
+        }
+        return result;		
+	}	
 
 	@Override
 	public ArrayList<Country> getCountries() {
@@ -341,6 +467,31 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         }
         return result;		
 	}
+	
+	@Override
+	public Country getCountry(String name) {
+		Country result=new Country();
+
+        HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+
+        try {
+            transaction = session.beginTransaction();
+            Query query=session.createQuery("from Country where name=:valueName");
+            query.setParameter("valueName", name);
+            List <Country> list=query.list();
+            if (list.size()>0) {
+                result=list.get(0);
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+       	 System.out.println(e);
+            log.error("Error: can't getCountry("+name+"): " + e);
+            transaction.rollback();
+            // throw new DAOException(e);
+        }
+        return result;		
+	}	
 
 	@Override
 	public ArrayList<Customer> getCustomers() {
@@ -388,6 +539,31 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         }
         return result;		
 	}
+	
+	@Override
+	public Customer getCustomer(String name) {
+		Customer result=new Customer();
+
+        HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+
+        try {
+            transaction = session.beginTransaction();
+            Query query=session.createQuery("from Customer where name=:valueName");
+            query.setParameter("valueName", name);
+            List <Customer> list=query.list();
+            if (list.size()>0) {
+                result=list.get(0);
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+       	 System.out.println(e);
+            log.error("Error: can't getCustomer("+name+"): " + e);
+            transaction.rollback();
+            // throw new DAOException(e);
+        }
+        return result;	
+	}	
 
 	@Override
 	public ArrayList<Os> getOses() {
@@ -434,6 +610,32 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         }
         return result;		
 	}
+	
+	@Override
+	public Os getOs(String name) {
+		Os result=new Os();
+
+        HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+
+        try {
+            transaction = session.beginTransaction();
+            Query query=session.createQuery("from Os where name=:valueName");
+            query.setParameter("valueName", name);
+            List <Os> list=query.list();
+            if (list.size()>0) {
+                result=list.get(0);
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+       	 System.out.println(e);
+            log.error("Error: can't getOs("+name+"): " + e);
+            transaction.rollback();
+            // throw new DAOException(e);
+        }
+        return result;		
+	}
+	
 
 	@Override
 	public ArrayList<PhoneType> getPhoneTypes() {
@@ -480,6 +682,31 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         }
         return result;		
 	}
+	
+	@Override
+	public PhoneType getPhoneType(String name) {
+		PhoneType result=new PhoneType();
+
+        HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+
+        try {
+            transaction = session.beginTransaction();
+            Query query=session.createQuery("from PhoneType where name=:valueName");
+            query.setParameter("valueName", name);
+            List <PhoneType> list=query.list();
+            if (list.size()>0) {
+                result=list.get(0);
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+       	 System.out.println(e);
+            log.error("Error: can't getPhoneType("+name+"): " + e);
+            transaction.rollback();
+            // throw new DAOException(e);
+        }
+        return result;		
+	}	
 
 	@Override
 	public ArrayList<Processor> getProcessors() {
@@ -526,6 +753,32 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         }
         return result;		
 	}
+	
+	@Override
+	public Processor getProcessor(String name) {
+		Processor result=new Processor();
+
+        HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+
+        try {
+            transaction = session.beginTransaction();
+            Query query=session.createQuery("from Processor where name=:valueName");
+            query.setParameter("valueName", name);
+            List <Processor> list=query.list();
+            if (list.size()>0) {
+                result=list.get(0);
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+       	 System.out.println(e);
+            log.error("Error: can't getProcessor("+name+"): " + e);
+            transaction.rollback();
+            // throw new DAOException(e);
+        }
+        return result;	
+	}
+	
 
 	@Override
 	public ArrayList<ScratchProtect> getScratchProtects() {
@@ -572,6 +825,31 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         }
         return result;		
 	}
+	
+	@Override
+	public ScratchProtect getScratchProtect(String name) {
+		ScratchProtect result=new ScratchProtect();
+
+        HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+
+        try {
+            transaction = session.beginTransaction();
+            Query query=session.createQuery("from ScratchProtect where name=:valueName");
+            query.setParameter("valueName", name);
+            List <ScratchProtect> list=query.list();
+            if (list.size()>0) {
+                result=list.get(0);
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+       	 System.out.println(e);
+            log.error("Error: can't getScratchProtect("+name+"): " + e);
+            transaction.rollback();
+            // throw new DAOException(e);
+        }
+        return result;	
+	}	
 
 	@Override
 	public ArrayList<ScreenResolution> getScreenResolutions() {
@@ -618,6 +896,32 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         }
         return result;		
 	}
+	
+	@Override
+	public ScreenResolution getScreenResolution(String name) {
+		ScreenResolution result=new ScreenResolution();
+
+        HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+
+        try {
+            transaction = session.beginTransaction();
+            Query query=session.createQuery("from ScreenResolution where resolution=:valueName");
+            query.setParameter("valueName", name);
+            List <ScreenResolution> list=query.list();
+            if (list.size()>0) {
+                result=list.get(0);
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+       	 System.out.println(e);
+            log.error("Error: can't getScreenResolution("+name+"): " + e);
+            transaction.rollback();
+            // throw new DAOException(e);
+        }
+        return result;		
+	}
+	
 
 	@Override
 	public ArrayList<ScreenTechnology> getScreenTechnologies() {
@@ -664,6 +968,32 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         }
         return result;		
 	}
+	
+	@Override
+	public ScreenTechnology getScreenTechnology(String name) {
+		ScreenTechnology result=new ScreenTechnology();
+
+        HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+
+        try {
+            transaction = session.beginTransaction();
+            Query query=session.createQuery("from ScreenTechnology where name=:valueName");
+            query.setParameter("valueName", name);
+            List <ScreenTechnology> list=query.list();
+            if (list.size()>0) {
+                result=list.get(0);
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+       	 System.out.println(e);
+            log.error("Error: can't getScreenTechnology("+name+"): " + e);
+            transaction.rollback();
+            // throw new DAOException(e);
+        }
+        return result;	
+	}
+	
 
 	@Override
 	public ArrayList<SimCardFormat> getSimCardFormats() {
@@ -710,6 +1040,32 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         }
         return result;		
 	}
+	
+
+	@Override
+	public SimCardFormat getSimCardFormat(String name) {
+		SimCardFormat result=new SimCardFormat();
+
+        HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+
+        try {
+            transaction = session.beginTransaction();
+            Query query=session.createQuery("from SimCardFormat where name=:valueName");
+            query.setParameter("valueName", name);
+            List <SimCardFormat> list=query.list();
+            if (list.size()>0) {
+                result=list.get(0);
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+       	 System.out.println(e);
+            log.error("Error: can't getSimCardFormat("+name+"): " + e);
+            transaction.rollback();
+            // throw new DAOException(e);
+        }
+        return result;	
+	}	
     
 	@Override
 	public String getInfo(String valueName){
@@ -814,5 +1170,25 @@ public class SimpleDAO extends DAO implements InterfaceSimpleDAO{
         }
         return result;		
 	}
+
+
+
+
+
+
+	
+
+
+
+
+
+
+
+
+	
+	
+
+
+
 	
 }

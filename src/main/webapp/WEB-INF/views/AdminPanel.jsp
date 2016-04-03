@@ -4,6 +4,15 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <html>
 <body>
+	<c:out value="${requestScope.header}"/>:<br>
+	<c:if test="${requestScope.list.size()>0}">
+		<ul>
+			<c:forEach var="current" items="${requestScope.list}">
+				<li><c:out value="${current}"/></li><br>
+			</c:forEach>				 
+		</ul>
+		<hr><br>
+	</c:if>
 	<br>
 	<form action="downloadPhones" method="POST" enctype="multipart/form-data">
 		Загрузить файл с телефонами:

@@ -3,6 +3,7 @@ package workset.beans.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -25,20 +26,22 @@ public class Photo implements InterfacePhoto {
 	@Column(name = "ismain")
 	private boolean isMain;
 	
-	public Photo(int id, String name, String comment) {
+	@Column(name = "goodPrefix")
+	@Size(min=3, max=3)
+	private String goodPrefix;	
+	
+	@ManyToOne
+	private Phone phone;
+	
+	public Photo(int id, String name, String comment, String goodPrefix, Phone phone) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.comment = comment;
 		this.isMain = false;
+		this.goodPrefix = goodPrefix;
+		this.phone=phone;
 	}
-	
-	public Photo(int id, String name, String comment, boolean isMain) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.isMain = isMain;
-	}	
 	
 	public Photo() {
 		super();
@@ -74,5 +77,21 @@ public class Photo implements InterfacePhoto {
 
 	public void setMain(boolean isMain) {
 		this.isMain = isMain;
+	}
+
+	public String getGoodPrefix() {
+		return goodPrefix;
+	}
+
+	public void setGoodPrefix(String goodPrefix) {
+		this.goodPrefix = goodPrefix;
+	}
+
+	public Phone getPhone() {
+		return phone;
+	}
+
+	public void setPhone(Phone phone) {
+		this.phone = phone;
 	}
 }

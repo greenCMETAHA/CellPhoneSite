@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.hibernate.Session;
 
@@ -38,6 +40,7 @@ public class App {
 		try {
 			SimpleDAO simpleDAO=SimpleDAO.startDAO();
 			UserDAO userDAO=UserDAO.startDAO();
+			PhoneDAO phoneDAO=PhoneDAO.startDAO();
 			
 			
 /*			ArrayList<BodyStuff> list3=simpleDAO.getBodyStuff();
@@ -309,7 +312,6 @@ public class App {
 			
 			price = phoneDAO.getPrice(1);
 			System.out.println("getLastPrice:  "+price.getId()+price.getPrice());
-*/
 	
 			ArrayList<Shop> list22=simpleDAO.getShops();
 			for (Shop current:list22){
@@ -320,6 +322,77 @@ public class App {
 			
 			Shop shop = simpleDAO.getShop(1);
 			System.out.println(":  "+shop.getId()+shop.getName());
+			
+			System.out.println("=========================================================");
+			
+*/			
+		Phone phone1=(Phone)phoneDAO.get(Phone.class,1);
+//			Photo photo=new Photo(0, "photo3", "comment3", "Phn", phone1);
+//			
+//			HashSet<Photo> photos1=new HashSet<Photo>();
+//			photos1.add((Photo)phoneDAO.get(Photo.class,1));
+//			photos1.add((Photo)phoneDAO.get(Photo.class,2));
+//
+//			phone1.setPhoto(photos1);
+//			phoneDAO.saveOrUpdate(phone1);
+			
+			phone1=(Phone)phoneDAO.get(Phone.class,1);
+			
+			Set<Photo> list = phone1.getPhotos();
+			System.out.println(""+list.size());
+		
+			for(Photo photo: list){
+				System.out.println(""+photo.getId()+", "+photo.getName());
+			}
+			System.out.println("=========================================================");
+			
+			Phone phone2=phoneDAO.getPhone(2);
+			BodyColor bc1=simpleDAO.getBodyColor(1);
+			HashSet<BodyColor> list3 = new HashSet<BodyColor>();
+			list3.add(bc1);
+			bc1=simpleDAO.getBodyColor(2);
+			list3.add(bc1);
+			bc1=simpleDAO.getBodyColor(3);
+			list3.add(bc1);
+			phone2.setBodyColor(list3);
+			phoneDAO.saveOrUpdate(phone2);
+			
+			System.out.println("     Saved....");
+			phone1=phoneDAO.getPhone(2);
+			Set<BodyColor> colors=phone1.getBodyColor();
+			System.out.println(colors.size());
+			for(BodyColor bc: colors){
+				System.out.println(""+bc.getId()+", "+bc.getName());
+			}
+			
+			
+////			photos1.add(photo);
+////			phone1.setPhotos(photos1);
+////			phoneDAO.saveOrUpdate(phone1);
+//			 
+//			
+//			
+//			HashSet<Photo> photos=new HashSet<Photo>(); 
+//
+//			Phone phone= new Phone(3, "phone3"
+//					,(Os)simpleDAO.get(Os.class, 1)
+//					,(ScreenResolution)simpleDAO.get(ScreenResolution.class, 1)
+//					,(ScreenTechnology)simpleDAO.get(ScreenTechnology.class, 1)
+//					,(BodyType)simpleDAO.get(BodyType.class, 1)
+//					,(PhoneType)simpleDAO.get(PhoneType.class, 1)
+//					,(ScratchProtect)simpleDAO.get(ScratchProtect.class, 1)
+//					,(Processor)simpleDAO.get(Processor.class, 1)
+//					,(Manufacturer)simpleDAO.get(Manufacturer.class, 1)
+//					,(BatteryType)simpleDAO.get(BatteryType.class, 1)
+//					,(SimCardFormat)simpleDAO.get(SimCardFormat.class, 1),
+//					photos);
+//			phoneDAO.saveOrUpdate(phone);
+//			Phone phone=(Phone)phoneDAO.get(Phone.class,1);
+//			System.out.println(phone.getId()+", "+phone.getName());
+//			
+//			Set<Photo> photos=(Set<Photo>) phone.getPhoto();
+//			System.out.println(photos.size());
+			
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

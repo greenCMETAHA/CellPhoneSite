@@ -127,6 +127,31 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
         }
         return result;
     }
+	
+	@Override
+	public Phone getPhone(String name) {
+		Phone result=new Phone();
+
+        HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+
+        try {
+            transaction = session.beginTransaction();
+            Query query=session.createQuery("from Phone where name=:valueName");
+            query.setParameter("valueName", name);
+            List <Phone> list=query.list();
+            if (list.size()>0) {
+                result=list.get(0);
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+       	 System.out.println(e);
+            log.error("Error: can't getPhone("+name+"): " + e);
+            transaction.rollback();
+            //	throw new DAOException(e);
+        }
+        return result;
+	}	
 
 	@Override
 	public ArrayList<Photo> getPhotos(Phone phone) {
@@ -199,6 +224,59 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
         }
         return result;
     }
+	
+	@Override
+	public Photo getPhoto(String filename) {
+		Photo result=new Photo();
+
+        HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+
+        try {
+            transaction = session.beginTransaction();
+            Query query=session.createQuery("from Photo where name=:fileName");
+            query.setParameter("fileName", filename);
+            List <Photo> list=query.list();
+            if (list.size()>0) {
+                result=list.get(0);
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+       	 System.out.println(e);
+            log.error("Error: can't getPhoto("+filename+"): " + e);
+            transaction.rollback();
+            //throw new DAOException(e);
+        }
+        return result;
+	}
+	
+
+	@Override
+	public Photo getPhoto(String filename, Phone phone) {
+		Photo result=new Photo();
+
+        HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+
+        try {
+            transaction = session.beginTransaction();
+            Query query=session.createQuery("from Photo where goodPrefix=:goodPrefix and name=:filename and good_id=:good_id");
+            query.setParameter("goodPrefix", Service.PHONES_PREFIX);
+            query.setParameter("good_id", phone.getId());
+            query.setParameter("fileName", filename);
+            List <Photo> list=query.list();
+            if (list.size()>0) {
+                result=list.get(0);
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+       	 System.out.println(e);
+            log.error("Error: can't getPhoto("+filename+"): " + e);
+            transaction.rollback();
+            //throw new DAOException(e);
+        }
+        return result;
+    }	
 
 	@Override
 	public ArrayList<Price> getPrices(Phone phone) {
@@ -271,5 +349,32 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
         }
         return result;
     }
+	
+	@Override
+	public Price getPriceByPrice(double price, Phone phone) {
+		Price result=new Price();
+
+        HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+
+        try {
+            transaction = session.beginTransaction();
+            Query query=session.createQuery("from Price where goodPrefix=:goodPrefix and price=:price and good_id=:good_id");
+            query.setParameter("goodPrefix", Service.PHONES_PREFIX);
+            query.setParameter("price", price);
+            query.setParameter("good_id", phone.getId());
+            List <Price> list=query.list();
+            if (list.size()>0) {
+                result=list.get(0);
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+       	 System.out.println(e);
+            log.error("Error: can't getPrice("+phone.getId()+", "+phone.getName()+": "+price+"): " + e);
+            transaction.rollback();
+            // throw new DAOException(e);
+        }
+        return result;
+	}
 
 }

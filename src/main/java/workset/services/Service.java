@@ -15,6 +15,8 @@ public class Service {
 	public static int LOG_ON_PAGE=20;
 	public static int ELEMENTS_ON_PAGE=10;
 	
+	public static String PHONES_PREFIX="Phn";
+	
 	public Service(){
 		
 	}

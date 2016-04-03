@@ -1,10 +1,26 @@
 package workset.beans.entities;
 
+
+import workset.beans.entities.BatteryType;
+import workset.beans.entities.BodyColor;
+import workset.beans.entities.BodyStuff;
+import workset.beans.entities.BodyType;
+import workset.beans.entities.Manufacturer;
+import workset.beans.entities.Os;
+import workset.beans.entities.PhoneType;
+import workset.beans.entities.Photo;
+import workset.beans.entities.Price;
+import workset.beans.entities.Processor;
+import workset.beans.entities.ScratchProtect;
+import workset.beans.entities.ScreenResolution;
+import workset.beans.entities.ScreenTechnology;
+import workset.beans.entities.SimCardFormat;
+import workset.beans.interfaces.InterfaceBatteryType;
 import workset.beans.interfaces.InterfaceBodyType;
 import workset.beans.interfaces.InterfaceManufacturer;
 import workset.beans.interfaces.InterfaceOS;
 import workset.beans.interfaces.InterfacePhone;
-import workset.beans.interfaces.InterfacePhoto;
+import workset.beans.interfaces.InterfacePhoneType;
 import workset.beans.interfaces.InterfacePrice;
 import workset.beans.interfaces.InterfaceProcessor;
 import workset.beans.interfaces.InterfaceSIMCardFormat;
@@ -19,6 +35,7 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -28,6 +45,7 @@ import javax.validation.constraints.Size;
 @Entity
 @Table( name = "phones")
 public class Phone implements InterfacePhone {
+	
 	
 	@Id
 	@Column(name = "id", unique = true, nullable = false)
@@ -144,10 +162,10 @@ public class Phone implements InterfacePhone {
 	private boolean infrared;
 	
 	@Column(name = "timespeak")
-	private double timeSpeak;
+	private String timeSpeak;
 	
 	@Column(name = "timewait")
-	private double timewait;
+	private String timewait;
 	
 	@Column(name = "stilus")
 	private boolean stilus;
@@ -194,6 +212,9 @@ public class Phone implements InterfacePhone {
 	
 	@ManyToOne
 	private BodyType bodyType;
+
+	@ManyToOne
+	private PhoneType phoneType;
 	
 	@ManyToOne
 	private ScratchProtect scratchprotect;
@@ -211,14 +232,21 @@ public class Phone implements InterfacePhone {
 	private SimCardFormat simCardFormat; 
 	
 	@OneToMany
-	private Set<Photo> photos;
+	@JoinTable(name = "photostable")
+	private Set<Photo> photo;
 	
 	@OneToMany
+	@JoinTable(name = "pricestable")
 	private Set<Price> prices;
 	
 	@OneToMany
+	@JoinTable(name = "bodycolortable")
 	private Set<BodyColor> bodyColor;
 
+	@OneToMany
+	@JoinTable(name = "bodystufftable")
+	private Set<BodyStuff> bodyStuff;
+	
 
 	public Phone() {
 		super();
@@ -233,11 +261,11 @@ public class Phone implements InterfacePhone {
 			boolean shockResistanceEsnclosure, boolean dustProtection, boolean qwertyKeyboard, boolean fingerPrint,
 			boolean sosKey, boolean accelerometer, boolean gyroscope, boolean lightSensor, boolean fmRadio,
 			boolean fmTransmitter, boolean gps, boolean glonass, boolean hspa, boolean nfc, boolean bluetooth,
-			boolean wifi, boolean usb, boolean audioOutput, boolean wirelessCharger, boolean infrared, double timeSpeak,
-			double timewait, boolean stilus, double length, double width, double thickness, double weight,
-			double judgement, String description, String specification, InterfaceManufacturer manufacturer,
+			boolean wifi, boolean usb, boolean audioOutput, boolean wirelessCharger, boolean infrared, String timeSpeak,
+			String timewait, boolean stilus, double length, double width, double thickness, double weight,
+			double judgement, String description, String specification, InterfaceManufacturer manufacturer, InterfacePhoneType phoneType,
 			InterfaceSimpleDAO batteryType, InterfaceSIMCardFormat simCardFormat, boolean nonRemovableBattery,
-			Set<Photo> photos, HashSet<Price> prices, double discount, int inStock, boolean shockResistanceEnclosure) {
+			HashSet<Photo> photo, HashSet<Price> prices, HashSet<BodyStuff> bodyStuff, double discount, int inStock, boolean shockResistanceEnclosure) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -297,10 +325,12 @@ public class Phone implements InterfacePhone {
 		this.batteryType = (BatteryType) batteryType;
 		this.simCardFormat = (SimCardFormat) simCardFormat;
 		this.nonRemovableBattery = nonRemovableBattery;
-		this.photos = photos;
+		this.photo = photo;
 		this.prices = prices;
 		this.inStock = inStock;
 		this.discount = discount;
+		this.phoneType = (PhoneType) phoneType;
+		this.bodyStuff = bodyStuff;
 	}
 	
 	public Phone(int id, String name, String modelYear, InterfaceOS os, double screenSize,
@@ -312,11 +342,11 @@ public class Phone implements InterfacePhone {
 			boolean shockResistanceEsnclosure, boolean dustProtection, boolean qwertyKeyboard, boolean fingerPrint,
 			boolean sosKey, boolean accelerometer, boolean gyroscope, boolean lightSensor, boolean fmRadio,
 			boolean fmTransmitter, boolean gps, boolean glonass, boolean hspa, boolean nfc, boolean bluetooth,
-			boolean wifi, boolean usb, boolean audioOutput, boolean wirelessCharger, boolean infrared, double timeSpeak,
-			double timewait, boolean stilus, double length, double width, double thickness, double weight,
-			double judgement, String description, String specification, InterfaceManufacturer manufacturer,
+			boolean wifi, boolean usb, boolean audioOutput, boolean wirelessCharger, boolean infrared, String timeSpeak,
+			String timewait, boolean stilus, double length, double width, double thickness, double weight,
+			double judgement, String description, String specification, InterfaceManufacturer manufacturer, InterfacePhoneType phoneType,
 			InterfaceSimpleDAO batteryType, InterfaceSIMCardFormat simCardFormat, boolean nonRemovableBattery,
-			Set<Photo> photos, HashSet<Price> prices, boolean shockResistanceEnclosure) {
+			HashSet<Photo> photo, HashSet<Price> prices, HashSet<BodyStuff> bodyStuff, boolean shockResistanceEnclosure) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -374,12 +404,14 @@ public class Phone implements InterfacePhone {
 		this.specification = specification;
 		this.manufacturer = (Manufacturer) manufacturer;
 		this.batteryType = (BatteryType) batteryType;
+		this.phoneType = (PhoneType) phoneType;
 		this.simCardFormat = (SimCardFormat) simCardFormat;
 		this.nonRemovableBattery = nonRemovableBattery;
-		this.photos = photos;
+		this.photo = photo;
 		this.prices = prices;
 		this.inStock = 0;
 		this.discount = 0;
+		this.bodyStuff = bodyStuff;
 	}	
 
 	public Phone(int id, String name) {
@@ -744,19 +776,19 @@ public class Phone implements InterfacePhone {
 		this.infrared = infrared;
 	}
 
-	public double getTimeSpeak() {
+	public String getTimeSpeak() {
 		return timeSpeak;
 	}
 
-	public void setTimeSpeak(double timeSpeak) {
+	public void setTimeSpeak(String timeSpeak) {
 		this.timeSpeak = timeSpeak;
 	}
 
-	public double getTimewait() {
+	public String getTimewait() {
 		return timewait;
 	}
 
-	public void setTimewait(double timewait) {
+	public void setTimewait(String timewait) {
 		this.timewait = timewait;
 	}
 
@@ -832,11 +864,11 @@ public class Phone implements InterfacePhone {
 		this.manufacturer = (Manufacturer) manufacturer;
 	}
 
-	public InterfaceSimpleDAO getBatteryType() {
-		return (InterfaceSimpleDAO) batteryType;
+	public InterfaceBatteryType getBatteryType() {
+		return (InterfaceBatteryType) batteryType;
 	}
 
-	public void setBatteryType(InterfaceSimpleDAO batteryType) {
+	public void setBatteryType(BatteryType batteryType) {
 		this.batteryType = (BatteryType) batteryType;
 	}
 
@@ -857,15 +889,15 @@ public class Phone implements InterfacePhone {
 	}
 
 	public Set<Photo> getPhotos() {
-		return photos;
+		return photo;
 	}
 
-	public void setPhotos(Set<Photo> photos) {
-		this.photos = photos;
+	public void setPhotos(HashSet<Photo> photo) {
+		this.photo = photo;
 	}
 	
 	public void setPhoto(Photo photo) {
-		this.photos.add(photo);
+		this.photo.add(photo);
 	}		
 
 	public Set<Price> getPrices() {
@@ -921,5 +953,24 @@ public class Phone implements InterfacePhone {
 	public void setInStock(int inStock) {
 		this.inStock = inStock;
 	}	
+
+	public PhoneType getPhoneType() {
+		return phoneType;
+	}
+
+	public void setPhoneType(PhoneType phoneType) {
+		this.phoneType = phoneType;
+	}
+
+	public Set<BodyStuff> getBodyStuff() {
+		return bodyStuff;
+	}
+
+	public void setBodyStuff(HashSet<BodyStuff> bodyStuff) {
+		this.bodyStuff = bodyStuff;
+	}
+
+
+
 	
 }

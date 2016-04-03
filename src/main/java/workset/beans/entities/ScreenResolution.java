@@ -42,6 +42,6 @@ public class ScreenResolution implements InterfaceScreenResolution {
 	}
 	
 	public void setResolution(String name) {
-		this.resolution = resolution;
+		this.resolution = name;
 	}
 }

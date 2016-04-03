@@ -12,13 +12,17 @@ public interface InterfacePhoneDAO extends Serializable, InterfaceDAO {
 
 	ArrayList<Phone> getPhones();
 	ArrayList<Phone> getPhones(int page);
-    Phone getPhone(int id);	
+	Phone getPhone(int id);
+	Phone getPhone(String name);
 
     ArrayList<Photo> getPhotos(Phone phone);
     Photo getMainPhoto(Phone phone);
     Photo getPhoto(int id);
+    Photo getPhoto(String filename);
+    Photo getPhoto(String filename, Phone phone);
 
     ArrayList<Price> getPrices(Phone phone);
     Price getLastPrice(Phone phone);
     Price getPrice(int id);
+    Price getPriceByPrice(double price, Phone phone);
 }

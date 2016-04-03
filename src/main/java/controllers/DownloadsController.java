@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,22 +15,40 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import workset.beans.entities.User;
 import workset.dao.dao.PhoneDAO;
 import workset.dao.dao.SimpleDAO;
 import workset.dao.dao.UserDAO;
+import workset.services.Service;
+import workset.services.WorkWithExcel;
 
 @Controller
 @SessionAttributes({"user", "basket", "wishList"})
 public class DownloadsController {
 	@Autowired
+	SimpleDAO simpleDAO;
+	
+	@Autowired
 	PhoneDAO phoneDAO;
+
+	@Autowired
+	UserDAO userDAO;
 	
 	@RequestMapping(value = "/downloadPhones", method = {RequestMethod.POST, RequestMethod.GET})
 	public String downloadPhones(
 			@RequestParam(value = "fileExcel", required = false) MultipartFile fileExcel,
 			HttpServletRequest request,Locale locale, Model model) {
-
-		model.addAttribute("header", "Файл с информацией по телефонам загружен");
+		
+		User user=userDAO.getUser(1); //временная загрушка
+		
+		ArrayList<String> list=new ArrayList<String>();	//list - список с ошибками при загрузке 
+		list=WorkWithExcel.downloadExcel("Product", Service.PHONES_PREFIX, user, fileExcel, simpleDAO, phoneDAO, userDAO, request.getSession());
+		if (list.size()==0){
+			model.addAttribute("header", "Файл с информацией по телефонам загружен");
+		}else{
+			model.addAttribute("header", "Файл с информацией по телефонам загружен с ошибками");
+		}
+		model.addAttribute("list",list);
 
 		return "AdminPanel";
 	}
@@ -39,9 +58,17 @@ public class DownloadsController {
 			@RequestParam(value = "fileExcel", required = false) MultipartFile fileExcel,
 			HttpServletRequest request,Locale locale, Model model) {
 
+		User user=userDAO.getUser(1); //временная загрушка
 		
-		model.addAttribute("header", "Файл с ценами по телефонам загружен");
-
+		ArrayList<String> list=new ArrayList<String>();	//list - список с ошибками при загрузке 
+		list=WorkWithExcel.downloadExcel("Price", Service.PHONES_PREFIX, user, fileExcel, simpleDAO, phoneDAO, userDAO, request.getSession());
+		if (list.size()==0){
+			model.addAttribute("header", "Файл с ценами по телефонам загружен");
+		}else{
+			model.addAttribute("header", "Файл с ценами по телефонам загружен с ошибками");
+		}
+		model.addAttribute("list",list);
+		
 		return "AdminPanel";
 	}
 	
@@ -50,8 +77,17 @@ public class DownloadsController {
 			@RequestParam(value = "fileExcel", required = false) MultipartFile fileExcel,
 			HttpServletRequest request,Locale locale, Model model) {
 
-		model.addAttribute("header", "Файл с фотографиями телефонов загружен");
-
+		User user=userDAO.getUser(1); //временная загрушка
+		
+		ArrayList<String> list=new ArrayList<String>();	//list - список с ошибками при загрузке 
+		list=WorkWithExcel.downloadExcel("Photo", Service.PHONES_PREFIX, user, fileExcel, simpleDAO, phoneDAO, userDAO, request.getSession());
+		if (list.size()==0){
+			model.addAttribute("header", "Файл с фотографиями телефонов загружен");
+		}else{
+			model.addAttribute("header", "Файл с фотографиями телефонов загружен с ошибками");
+		}		
+		model.addAttribute("list",list); 
+		
 		return "AdminPanel";
 	}
 		
