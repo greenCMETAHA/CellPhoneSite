@@ -155,256 +155,259 @@ public class WorkWithExcel {
            		SimCardFormat simCardFormat = new SimCardFormat();
 
                for (Cell cell : row) { //перебираем значения строки
-               	switch (cell.getColumnIndex()) {
-					case 0:{
-						if (cell.getCellType()==cell.CELL_TYPE_STRING){
-							current.setName(cell.getStringCellValue());
-						}
-						break;
-					}
-					case 1:{
-						if (cell.getCellType()==cell.CELL_TYPE_STRING){
-							current.setSpecification(cell.getStringCellValue());
-						}
-						break;
-					}
-					case 2:{
-						if (cell.getCellType()==cell.CELL_TYPE_STRING){
-							current.setDescription(cell.getStringCellValue());
-						}
-						break;
-					}
-					case 3:{ 
-						if (cell.getCellType()==cell.CELL_TYPE_STRING){
-							manufacturer.setName(cell.getStringCellValue());
-						}
-						current.setManufacturer(manufacturer);
-						break;
-					}
-					case 4:{ 
-						if (cell.getCellType()==cell.CELL_TYPE_STRING){
-							country.setName(cell.getStringCellValue());
-						}
-						manufacturer.setCountry(country);
-						break;
-					}
-					case 5:{ 
-						if (cell.getCellType()==cell.CELL_TYPE_STRING){
-							current.setModelYear(cell.getStringCellValue());
-						}
-						break;
-					}
-					case 6:{ 
-						if (cell.getCellType()==cell.CELL_TYPE_STRING){
-							phoneType.setName(cell.getStringCellValue());
-						}
-						current.setPhoneType(phoneType);
-						break;
-					}
-					case 7:{ 
-						if (cell.getCellType()==Cell.CELL_TYPE_STRING){
-							os.setName(cell.getStringCellValue());
-						}
-						current.setOs(os);
-						break;
-					}					
-					case 8:{
-						if (cell.getCellType()==cell.CELL_TYPE_STRING){
-							screenResolution.setResolution(cell.getStringCellValue());
-						}
-						current.setScreenResolution(screenResolution);
-						break;
-					}
-					case 9:{
-						if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
-							current.setScreenSize(cell.getNumericCellValue());
-						}
-						break;
-					}					
-					case 10:{
-						if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
-							current.setOperationMemory(cell.getNumericCellValue());
-						}
-						break;
-					}							
-					case 11:{
-						if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
-							current.setFlashMemory(cell.getNumericCellValue());
-						}
-						break;
-					}							
-					case 12:{
-						if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
-							current.setDualSIM(cell.getNumericCellValue());
-						}
-						break;
-					}							
-					case 13:{
-						if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
-							current.setCamera(cell.getNumericCellValue());
-						}
-						break;
-					}							
-					case 14:{
-						if (cell.getCellType()==cell.CELL_TYPE_STRING){
-							processor.setName(cell.getStringCellValue());
-						}
-						current.setProcessor(processor);
-						break;
-					}							
-					case 15:{
-						if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
-							current.setCoresNumber((byte)cell.getNumericCellValue());
-						}
-						break;
-					}					
-					case 16:{
-						if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
-							current.setProcessorFrequency(cell.getNumericCellValue());
-						}
-						break;
-					}									
-					case 17:{
-						if (cell.getCellType()==cell.CELL_TYPE_STRING){
-							bodyType.setName(cell.getStringCellValue());
-						}
-						current.setBodyType(bodyType);
-						break;
-					}									
-					case 18:{
-						if (cell.getCellType()==cell.CELL_TYPE_STRING){
-							String cellValue=cell.getStringCellValue();
-							HashSet<BodyStuff> listBodyStuff=new HashSet<BodyStuff>();
-							if (cellValue.length()>0){
-								while(cellValue.indexOf(",")>0){
-									String value=cellValue.substring(0, cellValue.indexOf(",")-1);
-									cellValue=cellValue.substring(cellValue.indexOf(",")+1, cellValue.length());
-									BodyStuff bodyStuff=new BodyStuff();
-									bodyStuff.setName(value);
-									listBodyStuff.add(bodyStuff);
-								}
-								if (cellValue.length()>0){
-									BodyStuff bodyStuff=new BodyStuff();
-									bodyStuff.setName(cellValue);
-									listBodyStuff.add(bodyStuff);
-								}
-								current.setBodyStuff(listBodyStuff);
+            	   if (cell.toString().equals("name")){
+            		   break;
+            	   }
+	               	switch (cell.getColumnIndex()) {
+						case 0:{
+							if (cell.getCellType()==cell.CELL_TYPE_STRING){
+								current.setName(cell.getStringCellValue());
 							}
+							break;
 						}
-						break;
-					}
-					case 19:{
-						if (cell.getCellType()==cell.CELL_TYPE_STRING){
-							String cellValue=cell.getStringCellValue();
-							HashSet<BodyColor> listBodyColor=new HashSet<BodyColor>();
-							if (cellValue.length()>0){
-								while(cellValue.indexOf(",")>0){
-									String value=cellValue.substring(0, cellValue.indexOf(",")-1);
-									cellValue=cellValue.substring(cellValue.indexOf(",")+1, cellValue.length());
-									BodyColor bodyColor=new BodyColor();
-									bodyColor.setName(value);
-									listBodyColor.add(bodyColor);
-								}
-								if (cellValue.length()>0){
-									BodyColor bodyColor=new BodyColor();
-									bodyColor.setName(cellValue);
-									listBodyColor.add(bodyColor);
-								}
-								current.setBodyColor(listBodyColor);
+						case 1:{
+							if (cell.getCellType()==cell.CELL_TYPE_STRING){
+								current.setSpecification(cell.getStringCellValue());
 							}
+							break;
 						}
-						break;
-					}					
-					case 20:{
-						if (cell.getCellType()==cell.CELL_TYPE_STRING){
-							current.setQwertyKeyboard((cell.getStringCellValue().length()>0?true:false));
+						case 2:{
+							if (cell.getCellType()==cell.CELL_TYPE_STRING){
+								current.setDescription(cell.getStringCellValue());
+							}
+							break;
 						}
-						break;
-					}									
-					case 21:{
-						if (cell.getCellType()==cell.CELL_TYPE_STRING){
-							simCardFormat.setName(cell.getStringCellValue());
+						case 3:{ 
+							if (cell.getCellType()==cell.CELL_TYPE_STRING){
+								manufacturer.setName(cell.getStringCellValue());
+							}
+							current.setManufacturer(manufacturer);
+							break;
 						}
-						current.setSimCardFormat(simCardFormat);
-						break;
-					}						
-					case 22:{
-						if (cell.getCellType()==cell.CELL_TYPE_STRING){
-							current.setFingerPrint((cell.getStringCellValue().length()>0?true:false));
+						case 4:{ 
+							if (cell.getCellType()==cell.CELL_TYPE_STRING){
+								country.setName(cell.getStringCellValue());
+							}
+							manufacturer.setCountry(country);
+							break;
 						}
-						break;
-					}
-					case 23:{
-						if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
-							current.setLength(cell.getNumericCellValue());
+						case 5:{ 
+							if (cell.getCellType()==cell.CELL_TYPE_STRING){
+								current.setModelYear(cell.getStringCellValue());
+							}
+							break;
 						}
-						break;
-					}						
-					case 24:{
-						if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
-							current.setWidth(cell.getNumericCellValue());
+						case 6:{ 
+							if (cell.getCellType()==cell.CELL_TYPE_STRING){
+								phoneType.setName(cell.getStringCellValue());
+							}
+							current.setPhoneType(phoneType);
+							break;
 						}
-						break;
-					}					
-					case 25:{
-						if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
-							current.setThickness(cell.getNumericCellValue());
+						case 7:{ 
+							if (cell.getCellType()==Cell.CELL_TYPE_STRING){
+								os.setName(cell.getStringCellValue());
+							}
+							current.setOs(os);
+							break;
+						}					
+						case 8:{
+							if (cell.getCellType()==cell.CELL_TYPE_STRING){
+								screenResolution.setResolution(cell.getStringCellValue());
+							}
+							current.setScreenResolution(screenResolution);
+							break;
 						}
-						break;
-					}
-					case 26:{
-						if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
-							current.setWeight(cell.getNumericCellValue());
+						case 9:{
+							if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
+								current.setScreenSize(cell.getNumericCellValue());
+							}
+							break;
+						}					
+						case 10:{
+							if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
+								current.setOperationMemory(cell.getNumericCellValue());
+							}
+							break;
+						}							
+						case 11:{
+							if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
+								current.setFlashMemory(cell.getNumericCellValue());
+							}
+							break;
+						}							
+						case 12:{
+							if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
+								current.setDualSIM(cell.getNumericCellValue());
+							}
+							break;
+						}							
+						case 13:{
+							if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
+								current.setCamera(cell.getNumericCellValue());
+							}
+							break;
+						}							
+						case 14:{
+							if (cell.getCellType()==cell.CELL_TYPE_STRING){
+								processor.setName(cell.getStringCellValue());
+							}
+							current.setProcessor(processor);
+							break;
+						}							
+						case 15:{
+							if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
+								current.setCoresNumber((byte)cell.getNumericCellValue());
+							}
+							break;
+						}					
+						case 16:{
+							if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
+								current.setProcessorFrequency(cell.getNumericCellValue());
+							}
+							break;
+						}									
+						case 17:{
+							if (cell.getCellType()==cell.CELL_TYPE_STRING){
+								bodyType.setName(cell.getStringCellValue());
+							}
+							current.setBodyType(bodyType);
+							break;
+						}									
+						case 18:{
+							if (cell.getCellType()==cell.CELL_TYPE_STRING){
+								String cellValue=cell.getStringCellValue();
+								HashSet<BodyStuff> listBodyStuff=new HashSet<BodyStuff>();
+								if (cellValue.length()>0){
+									while(cellValue.indexOf(",")>0){
+										String value=cellValue.substring(0, cellValue.indexOf(",")-1);
+										cellValue=cellValue.substring(cellValue.indexOf(",")+1, cellValue.length());
+										BodyStuff bodyStuff=new BodyStuff();
+										bodyStuff.setName(value);
+										listBodyStuff.add(bodyStuff);
+									}
+									if (cellValue.length()>0){
+										BodyStuff bodyStuff=new BodyStuff();
+										bodyStuff.setName(cellValue);
+										listBodyStuff.add(bodyStuff);
+									}
+									current.setBodyStuff(listBodyStuff);
+								}
+							}
+							break;
 						}
-						break;
-					}					
-					case 27:{
-						if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
-							current.setJudgement(cell.getNumericCellValue());
+						case 19:{
+							if (cell.getCellType()==cell.CELL_TYPE_STRING){
+								String cellValue=cell.getStringCellValue();
+								HashSet<BodyColor> listBodyColor=new HashSet<BodyColor>();
+								if (cellValue.length()>0){
+									while(cellValue.indexOf(",")>0){
+										String value=cellValue.substring(0, cellValue.indexOf(",")-1);
+										cellValue=cellValue.substring(cellValue.indexOf(",")+1, cellValue.length());
+										BodyColor bodyColor=new BodyColor();
+										bodyColor.setName(value);
+										listBodyColor.add(bodyColor);
+									}
+									if (cellValue.length()>0){
+										BodyColor bodyColor=new BodyColor();
+										bodyColor.setName(cellValue);
+										listBodyColor.add(bodyColor);
+									}
+									current.setBodyColor(listBodyColor);
+								}
+							}
+							break;
+						}					
+						case 20:{
+							if (cell.getCellType()==cell.CELL_TYPE_STRING){
+								current.setQwertyKeyboard((cell.getStringCellValue().length()>0?true:false));
+							}
+							break;
+						}									
+						case 21:{
+							if (cell.getCellType()==cell.CELL_TYPE_STRING){
+								simCardFormat.setName(cell.getStringCellValue());
+							}
+							current.setSimCardFormat(simCardFormat);
+							break;
+						}						
+						case 22:{
+							if (cell.getCellType()==cell.CELL_TYPE_STRING){
+								current.setFingerPrint((cell.getStringCellValue().length()>0?true:false));
+							}
+							break;
 						}
-						break;
-					}					
-					case 28:{
-						if (cell.getCellType()==cell.CELL_TYPE_STRING){
-							current.setAccelerometer((cell.getStringCellValue().length()>0?true:false));
+						case 23:{
+							if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
+								current.setLength(cell.getNumericCellValue());
+							}
+							break;
+						}						
+						case 24:{
+							if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
+								current.setWidth(cell.getNumericCellValue());
+							}
+							break;
+						}					
+						case 25:{
+							if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
+								current.setThickness(cell.getNumericCellValue());
+							}
+							break;
 						}
-						break;
-					}								
-					case 29:{
-						if (cell.getCellType()==cell.CELL_TYPE_STRING){
-							current.setGlonass((cell.getStringCellValue().length()>0?true:false));
+						case 26:{
+							if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
+								current.setWeight(cell.getNumericCellValue());
+							}
+							break;
+						}					
+						case 27:{
+							if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
+								current.setJudgement(cell.getNumericCellValue());
+							}
+							break;
+						}					
+						case 28:{
+							if (cell.getCellType()==cell.CELL_TYPE_STRING){
+								current.setAccelerometer((cell.getStringCellValue().length()>0?true:false));
+							}
+							break;
+						}								
+						case 29:{
+							if (cell.getCellType()==cell.CELL_TYPE_STRING){
+								current.setGlonass((cell.getStringCellValue().length()>0?true:false));
+							}
+							break;
+						}								
+						case 30:{
+							if (cell.getCellType()==cell.CELL_TYPE_STRING){
+								current.setLightSensor((cell.getStringCellValue().length()>0?true:false));
+							}
+							break;
 						}
-						break;
-					}								
-					case 30:{
-						if (cell.getCellType()==cell.CELL_TYPE_STRING){
-							current.setLightSensor((cell.getStringCellValue().length()>0?true:false));
+						case 31:{
+							if (cell.getCellType()==cell.CELL_TYPE_STRING){
+								batteryType.setName(cell.getStringCellValue());
+							}
+							current.setBatteryType((BatteryType)batteryType);
+							break;
 						}
-						break;
-					}
-					case 31:{
-						if (cell.getCellType()==cell.CELL_TYPE_STRING){
-							batteryType.setName(cell.getStringCellValue());
-						}
-						current.setBatteryType((BatteryType)batteryType);
-						break;
-					}
-					case 32:{
-						if (cell.getCellType()==cell.CELL_TYPE_STRING){
-							current.setTimeSpeak(cell.getStringCellValue());
-						}
-						break;
-					}						
-					case 33:{
-						if (cell.getCellType()==cell.CELL_TYPE_STRING){
-							current.setTimewait(cell.getStringCellValue());
-						}
-						break;
-					}						
-					default:
-						break;
-					}                	
-               }
+						case 32:{
+							if (cell.getCellType()==cell.CELL_TYPE_STRING){
+								current.setTimeSpeak(cell.getStringCellValue());
+							}
+							break;
+						}						
+						case 33:{
+							if (cell.getCellType()==cell.CELL_TYPE_STRING){
+								current.setTimewait(cell.getStringCellValue());
+							}
+							break;
+						}						
+						default:
+							break;
+						}                	
+	               }
            	//теперь собираем список.
            	
            	//System.out.println(currentBF.toString());
@@ -554,12 +557,12 @@ public class WorkWithExcel {
 		    		    					try{
 			    		    					simpleDAO.saveOrUpdate(country);
 			    		    					country=simpleDAO.getCountry(country.getName());
-			    		    					simpleDAO.saveOrUpdate(new Log(0, user, new GregorianCalendar().getTime()
+			    		    					simpleDAO.saveOrUpdate(new Log(user, new GregorianCalendar().getTime()
 			    		    							,"Country",""+country.getId(),country.getName(), "Загрузили из Excel"));
 			    		    					manufacturer.setCountry(country);
 		    		    					}catch(DAOException e){
 		    		    						System.out.println(e.getStackTrace());
-		    		    						errors.add(e.getStackTrace().toString());
+		    		    						errors.add(e.getCause().toString());
 		    		    					}
 	    		    						
 	    		    					}else{
@@ -568,17 +571,23 @@ public class WorkWithExcel {
 	    		    				}
 	    		    				if (manufacturer.getName().isEmpty()){
 	    		    					manufacturer.setName(Service.EMPTY);
-		    						}	    		    				
+		    						}
+	    		    				if (manufacturer.getFullName().isEmpty()){
+	    		    					manufacturer.setFullName(manufacturer.getName());
+		    						}
+	    		    				if (manufacturer.getCountry()==null){
+	    		    					manufacturer.setCountry(simpleDAO.getCountry(Service.EMPTY));
+	    		    				}
 	    		    				Manufacturer value=simpleDAO.getManufacturer(manufacturer.getName());
 	    		    				if (value.getId()==0){
 		    		    				try{
 			    		    				simpleDAO.saveOrUpdate(manufacturer);
 			    		    				manufacturer=simpleDAO.getManufacturer(manufacturer.getName());
-			    		    				simpleDAO.saveOrUpdate(new Log(0, user, new GregorianCalendar().getTime()
+			    		    				simpleDAO.saveOrUpdate(new Log(user, new GregorianCalendar().getTime()
 			    		    						,"Manufacturer",""+manufacturer.getId(),manufacturer.getName(), "Загрузили из Excel"));
 		    		    				}catch(DAOException e){
 		    		    					System.out.println(e.getStackTrace());
-	    		    						errors.add(e.getStackTrace().toString());
+	    		    						errors.add(e.getCause().toString());
 	    		    					}
 	    		    				}else{
 	    		    					manufacturer=value;
@@ -596,11 +605,11 @@ public class WorkWithExcel {
 				    					try{
 					    					simpleDAO.saveOrUpdate(os);
 					    					os=simpleDAO.getOs(os.getName());
-					    					simpleDAO.saveOrUpdate(new Log(0, user, new GregorianCalendar().getTime()
+					    					simpleDAO.saveOrUpdate(new Log(user, new GregorianCalendar().getTime()
 					    							,"OS",""+os.getId(),os.getName(), "Загрузили из Excel"));
 				    					}catch(DAOException e){
 				    						System.out.println(e.getStackTrace());
-	    		    						errors.add(e.getStackTrace().toString());
+	    		    						errors.add(e.getCause().toString());
 	    		    					}
     		    					}else{
     		    						os=value;
@@ -618,11 +627,11 @@ public class WorkWithExcel {
 				    					try{
 					    					simpleDAO.saveOrUpdate(screenResolution);
 					    					screenResolution=simpleDAO.getScreenResolution(screenResolution.getResolution());
-					    					simpleDAO.saveOrUpdate(new Log(0, user, new GregorianCalendar().getTime()
+					    					simpleDAO.saveOrUpdate(new Log(user, new GregorianCalendar().getTime()
 					    							,"ScreenResolution",""+screenResolution.getId(),screenResolution.getResolution(), "Загрузили из Excel"));
 				    					}catch(DAOException e){
 				    						System.out.println(e.getStackTrace());
-	    		    						errors.add(e.getStackTrace().toString());
+	    		    						errors.add(e.getCause().toString());
 	    		    					}
     		    					}else{
     		    						screenResolution=value;
@@ -638,10 +647,10 @@ public class WorkWithExcel {
 //				    					try{
 //					    					simpleDAO.saveOrUpdate(screenTechnology);
 //					    					screenResolution=simpleDAO.getScreenResolution(screenTechnology.getName());
-//					    					simpleDAO.saveOrUpdate(new Log(0, user, new GregorianCalendar().getTime()
+//					    					simpleDAO.saveOrUpdate(new Log(user, new GregorianCalendar().getTime()
 //					    							,"ScreenTechnology",""+screenTechnology.getId(),screenTechnology.getName(), "Загрузили из Excel"));
 //				    					}catch(DAOException e){
-//	    		    						errors.add(e.getStackTrace().toString());
+//	    		    						errors.add(e.getCause().toString());
 //	    		    					}
 //    		    					}
 //			    				}
@@ -657,11 +666,11 @@ public class WorkWithExcel {
 				    					try{
 					    					simpleDAO.saveOrUpdate(bodyType);
 					    					bodyType=simpleDAO.getBodyType(bodyType.getName());
-					    					simpleDAO.saveOrUpdate(new Log(0, user, new GregorianCalendar().getTime()
+					    					simpleDAO.saveOrUpdate(new Log(user, new GregorianCalendar().getTime()
 					    							,"BodyType",""+bodyType.getId(),bodyType.getName(), "Загрузили из Excel"));
 				    					}catch(DAOException e){
 				    						System.out.println(e.getStackTrace());
-	    		    						errors.add(e.getStackTrace().toString());
+	    		    						errors.add(e.getCause().toString());
 	    		    					}
     		    					}else{
     		    						bodyType=value;
@@ -679,11 +688,11 @@ public class WorkWithExcel {
 				    					try{
 					    					simpleDAO.saveOrUpdate(phoneType);
 					    					phoneType=simpleDAO.getPhoneType(phoneType.getName());
-					    					simpleDAO.saveOrUpdate(new Log(0, user, new GregorianCalendar().getTime()
+					    					simpleDAO.saveOrUpdate(new Log(user, new GregorianCalendar().getTime()
 					    							,"PhoneType",""+phoneType.getId(),phoneType.getName(), "Загрузили из Excel"));
 				    					}catch(DAOException e){
 				    						System.out.println(e.getStackTrace());
-	    		    						errors.add(e.getStackTrace().toString());
+	    		    						errors.add(e.getCause().toString());
 	    		    					}
     		    					}else{
     		    						phoneType=value;
@@ -698,10 +707,10 @@ public class WorkWithExcel {
 //				    					try{
 //					    					simpleDAO.saveOrUpdate(scratchprotect);
 //					    					scratchprotect=simpleDAO.getScratchProtect(scratchprotect.getName());
-//					    					simpleDAO.saveOrUpdate(new Log(0, user, new GregorianCalendar().getTime()
+//					    					simpleDAO.saveOrUpdate(new Log(user, new GregorianCalendar().getTime()
 //					    							,"ScratchProtect",""+scratchprotect.getId(),scratchprotect.getName(), "Загрузили из Excel"));
 //				    					}catch(DAOException e){
-//	    		    						errors.add(e.getStackTrace().toString());
+//	    		    						errors.add(e.getCause().toString());
 //	    		    					}
 //    		    					}
 //			    				}
@@ -717,11 +726,11 @@ public class WorkWithExcel {
 				    					try{
 					    					simpleDAO.saveOrUpdate(processor);
 					    					processor=simpleDAO.getProcessor(processor.getName());
-					    					simpleDAO.saveOrUpdate(new Log(0, user, new GregorianCalendar().getTime()
+					    					simpleDAO.saveOrUpdate(new Log(user, new GregorianCalendar().getTime()
 					    							,"Processor",""+processor.getId(),processor.getName(), "Загрузили из Excel"));
 				    					}catch(DAOException e){
 				    						System.out.println(e.getStackTrace());
-	    		    						errors.add(e.getStackTrace().toString());
+	    		    						errors.add(e.getCause().toString());
 	    		    					}
     		    					}else{
     		    						processor=value;
@@ -739,11 +748,11 @@ public class WorkWithExcel {
 				    					try{
 					    					simpleDAO.saveOrUpdate(batteryType);
 					    					batteryType=simpleDAO.getBatteryType(batteryType.getName());
-					    					simpleDAO.saveOrUpdate(new Log(0, user, new GregorianCalendar().getTime()
+					    					simpleDAO.saveOrUpdate(new Log(user, new GregorianCalendar().getTime()
 					    							,"BatteryType",""+batteryType.getId(),batteryType.getName(), "Загрузили из Excel"));
 				    					}catch(DAOException e){
 				    						System.out.println(e.getStackTrace());
-	    		    						errors.add(e.getStackTrace().toString());
+	    		    						errors.add(e.getCause().toString());
 	    		    					}
     		    					}else{
     		    						batteryType=value;
@@ -761,11 +770,11 @@ public class WorkWithExcel {
 				    					try{
 					    					simpleDAO.saveOrUpdate(simCardFormat);
 					    					simCardFormat=simpleDAO.getSimCardFormat(simCardFormat.getName());
-					    					simpleDAO.saveOrUpdate(new Log(0, user, new GregorianCalendar().getTime()
+					    					simpleDAO.saveOrUpdate(new Log(user, new GregorianCalendar().getTime()
 					    							,"SimCardFormat",""+simCardFormat.getId(),simCardFormat.getName(), "Загрузили из Excel"));
 				    					}catch(DAOException e){
 				    						System.out.println(e.getStackTrace());
-	    		    						errors.add(e.getStackTrace().toString());
+	    		    						errors.add(e.getCause().toString());
 	    		    					}
     		    					}else{
     		    						simCardFormat=value;
@@ -785,11 +794,11 @@ public class WorkWithExcel {
 					    					try{
 						    					simpleDAO.saveOrUpdate(currentColor);
 						    					currentColor=simpleDAO.getBodyColor(currentColor.getName());
-						    					simpleDAO.saveOrUpdate(new Log(0, user, new GregorianCalendar().getTime()
+						    					simpleDAO.saveOrUpdate(new Log(user, new GregorianCalendar().getTime()
 						    							,"BodyColor",""+currentColor.getId(),currentColor.getName(), "Загрузили из Excel"));
 					    					}catch(DAOException e){
 					    						System.out.println(e.getStackTrace());
-		    		    						errors.add(e.getStackTrace().toString());
+		    		    						errors.add(e.getCause().toString());
 		    		    					}
 	    		    					}else{
 	    		    						currentColor=value;
@@ -811,11 +820,11 @@ public class WorkWithExcel {
 					    					try{
 						    					simpleDAO.saveOrUpdate(currentStuff);
 						    					currentStuff=simpleDAO.getBodyStuff(currentStuff.getName());
-						    					simpleDAO.saveOrUpdate(new Log(0, user, new GregorianCalendar().getTime()
+						    					simpleDAO.saveOrUpdate(new Log(user, new GregorianCalendar().getTime()
 						    							,"BodyStuff",""+currentStuff.getId(),currentStuff.getName(), "Загрузили из Excel"));
 					    					}catch(DAOException e){
 					    						System.out.println(e.getStackTrace());
-		    		    						errors.add(e.getStackTrace().toString());
+		    		    						errors.add(e.getCause().toString());
 		    		    					}
 	    		    					}else{
 	    		    						currentStuff=value;
@@ -834,11 +843,11 @@ public class WorkWithExcel {
 				    					try{
 					    					phoneDAO.saveOrUpdate(current);
 					    					current=phoneDAO.getPhone(current.getName());
-					    					simpleDAO.saveOrUpdate(new Log(0, user, new GregorianCalendar().getTime()
+					    					simpleDAO.saveOrUpdate(new Log(user, new GregorianCalendar().getTime()
 					    							,"Phone",""+current.getId(),current.getName(), "Загрузили из Excel"));
 				    					}catch(DAOException e){
 				    						System.out.println(e.getStackTrace());
-	    		    						errors.add(e.getStackTrace().toString());
+	    		    						errors.add(e.getCause().toString());
 	    		    					}
     		    					}else{
     		    						current=value;
@@ -864,30 +873,25 @@ public class WorkWithExcel {
 	 	        		if (phone.getId()==0){
 	    					Phone value=phoneDAO.getPhone(phone.getName());
 	    					if (value.getId()==0){
-		    					try{
-			    					phoneDAO.saveOrUpdate(phone);
-			    					phone=phoneDAO.getPhone(phone.getName());
-			    					simpleDAO.saveOrUpdate(new Log(0, user, new GregorianCalendar().getTime()
-			    							,"Phone",""+phone.getId(),phone.getName(), "Загрузили из Excel"));
-		    					}catch(DAOException e){
-		    						System.out.println(e.getStackTrace());
-		    						errors.add(e.getStackTrace().toString());
-		    					}
+	    						errors.add("Не нашли телефон по наименованию: "+phone.getName());
+	    						continue;
 	    					}
 	    				}
 	 	        		current.setUser(user);
 	 	        		if (current.getId()==0){
 	 	        			Price value=phoneDAO.getPriceByPrice(current.getPrice(), phone);
+	 	        			value.setPhone(phone);
 	    					if (value.getId()==0){
 		    					try{
 			    					phoneDAO.saveOrUpdate(current);
-			    					simpleDAO.saveOrUpdate(new Log(0, user, new GregorianCalendar().getTime()
+			    					simpleDAO.saveOrUpdate(new Log(user, new GregorianCalendar().getTime()
 			    							,"Price",""+phone.getId(),phone.getName()+", "+current.getPrice(), "Загрузили из Excel"));
 		    					}catch(DAOException e){
 		    						System.out.println(e.getStackTrace());
-		    						errors.add(e.getStackTrace().toString());
+		    						errors.add(e.getCause().toString());
 		    					}
 	    					}
+	    					phone.addPrice(value);
 	    				}
 					}
 				}			
@@ -906,15 +910,8 @@ public class WorkWithExcel {
 	 	        		if (phone.getId()==0){
 	    					Phone value=phoneDAO.getPhone(phone.getName());
 	    					if (value.getId()==0){
-		    					try{
-			    					phoneDAO.saveOrUpdate(phone);
-			    					phone=phoneDAO.getPhone(phone.getName());
-			    					simpleDAO.saveOrUpdate(new Log(0, user, new GregorianCalendar().getTime()
-			    							,"Phone",""+phone.getId(),phone.getName(), "Загрузили из Excel"));
-		    					}catch(DAOException e){
-		    						System.out.println(e.getStackTrace());
-		    						errors.add(e.getStackTrace().toString());
-		    					}
+	    						errors.add("Не нашли телефон по наименованию: "+phone.getName());
+	    						continue;
 	    					}
 	    				}
 	 	        		if (current.getId()==0){
@@ -922,13 +919,14 @@ public class WorkWithExcel {
 	    					if (value.getId()==0){
 		    					try{
 			    					phoneDAO.saveOrUpdate(current);
-			    					simpleDAO.saveOrUpdate(new Log(0, user, new GregorianCalendar().getTime()
+			    					simpleDAO.saveOrUpdate(new Log(user, new GregorianCalendar().getTime()
 			    							,"Photo",""+phone.getId(),phone.getName(), "Загрузили из Excel"));
 		    					}catch(DAOException e){
 		    						System.out.println(e.getStackTrace());
-		    						errors.add(e.getStackTrace().toString());
+		    						errors.add(e.getCause().toString());
 		    					}
 	    					}
+	    					phone.addPhoto(value);
 	    				}
 					}
 				}			

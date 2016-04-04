@@ -3,10 +3,13 @@ package workset.beans.entities;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import workset.services.Service;
 import workset.beans.interfaces.InterfaceManufacturer;
@@ -21,6 +24,8 @@ public class Manufacturer implements InterfaceManufacturer{
 	private static final long serialVersionUID = 2659594803343434546L;
 
 	@Id
+	@GenericGenerator(name="gen",strategy="increment")
+	@GeneratedValue(generator="gen")
 	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 	

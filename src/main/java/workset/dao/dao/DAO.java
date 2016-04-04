@@ -59,7 +59,8 @@ public class DAO<T> implements InterfaceDAO<T> {
             session.saveOrUpdate(t);
             transaction.commit();
         } catch (Exception e) {
-        	System.out.println(e);
+        	System.out.println("-- "+e);
+        	System.out.println("-- "+e.getCause());
 //        } catch (HibernateException e) {
 //            log.error("Error: can't save or update object in Dao" + e);
 //            transaction.rollback();

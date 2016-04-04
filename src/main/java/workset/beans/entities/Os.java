@@ -2,9 +2,12 @@ package workset.beans.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import workset.beans.interfaces.InterfaceOS;
 
@@ -12,6 +15,8 @@ import workset.beans.interfaces.InterfaceOS;
 @Table( name = "os")
 public class Os implements InterfaceOS {
 	@Id
+	@GenericGenerator(name="gen",strategy="increment")
+	@GeneratedValue(generator="gen")
 	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 	

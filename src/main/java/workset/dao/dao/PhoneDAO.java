@@ -139,6 +139,7 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
             transaction = session.beginTransaction();
             Query query=session.createQuery("from Phone where name=:valueName");
             query.setParameter("valueName", name);
+            System.out.println(name);
             List <Phone> list=query.list();
             if (list.size()>0) {
                 result=list.get(0);

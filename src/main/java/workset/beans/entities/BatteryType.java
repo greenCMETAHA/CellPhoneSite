@@ -4,9 +4,12 @@ import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import workset.beans.interfaces.InterfaceBatteryType;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Table;
 
 @Entity
@@ -16,6 +19,8 @@ public class BatteryType implements InterfaceBatteryType {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GenericGenerator(name="gen",strategy="increment")
+	@GeneratedValue(generator="gen")
 	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 

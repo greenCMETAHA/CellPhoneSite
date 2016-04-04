@@ -4,10 +4,13 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import workset.services.Service;
 import workset.beans.interfaces.InterfaceLog;
@@ -15,7 +18,10 @@ import workset.beans.interfaces.InterfaceLog;
 @Entity
 @Table( name = "log")
 public class Log implements InterfaceLog{
+
 	@Id
+	@GenericGenerator(name="gen",strategy="increment")
+	@GeneratedValue(generator="gen")
 	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 	
@@ -50,6 +56,16 @@ public class Log implements InterfaceLog{
 		this.objectName = objectName;
 		setInfo(info);
 	}
+	
+	public Log(User user, Date time, String object, String objectId, String objectName, String info) {
+		super();
+		this.user = user;
+		this.time = time;
+		this.object = object;
+		this.objectId = objectId;
+		this.objectName = objectName;
+		setInfo(info);
+	}	
 	
 	public Log() {
 		super();

@@ -34,6 +34,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -42,21 +43,25 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.GenericGenerator;
+
 @Entity
 @Table( name = "phones")
 public class Phone implements InterfacePhone {
 	
 	
 	@Id
+	@GenericGenerator(name="gen",strategy="increment")
+	@GeneratedValue(generator="gen")
 	@Column(name = "id", unique = true, nullable = false)
 	private int id;
 	
 	@Column(name = "name")
-	@Size(min=0, max=45)
+	@Size(min=0, max=120)
 	private String name;
 	
 	@Column(name = "modelyear")
-	@Size(min=0, max=20)
+	@Size(min=0, max=45)
 	private String modelYear;
 	
 	@Column(name = "screensize")
@@ -162,9 +167,11 @@ public class Phone implements InterfacePhone {
 	private boolean infrared;
 	
 	@Column(name = "timespeak")
+	@Size(min=0, max=45)
 	private String timeSpeak;
 	
 	@Column(name = "timewait")
+	@Size(min=0, max=45)
 	private String timewait;
 	
 	@Column(name = "stilus")
@@ -250,6 +257,7 @@ public class Phone implements InterfacePhone {
 
 	public Phone() {
 		super();
+		name="";
 	}
 
 	public Phone(int id, String name, String modelYear, InterfaceOS os, double screenSize,
@@ -970,7 +978,19 @@ public class Phone implements InterfacePhone {
 		this.bodyStuff = bodyStuff;
 	}
 
-
-
+	public void addPrice(Price price) {
+		this.prices.add(price);
+	}
 	
+	public void addPhoto(Photo photo) {
+		this.photo.add(photo);
+	}
+
+	public void addBodyColor(BodyColor bodyColor) {
+		this.bodyColor.add(bodyColor);
+	}	
+	
+	public void addBodyStuff(BodyStuff bodyStuff) {
+		this.bodyStuff.add(bodyStuff);
+	}		
 }
