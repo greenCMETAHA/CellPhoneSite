@@ -32,8 +32,10 @@ import workset.dao.interfaces.InterfaceSimpleDAO;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
@@ -46,7 +48,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table( name = "phones")
+@Table( name = "phone")
 public class Phone implements InterfacePhone {
 	
 	
@@ -238,13 +240,13 @@ public class Phone implements InterfacePhone {
 	@ManyToOne
 	private SimCardFormat simCardFormat; 
 	
-	@OneToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinTable(name = "photostable")
 	private Set<Photo> photo;
 	
-	@OneToMany
+	@ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinTable(name = "pricestable")
-	private Set<Price> prices;
+	private Set<Price> price;
 	
 	@OneToMany
 	@JoinTable(name = "bodycolortable")
@@ -258,6 +260,10 @@ public class Phone implements InterfacePhone {
 	public Phone() {
 		super();
 		name="";
+		price=new HashSet<Price>();
+		photo=new HashSet<Photo>();
+		bodyColor=new HashSet<BodyColor>();
+		bodyStuff=new HashSet<BodyStuff>();
 	}
 
 	public Phone(int id, String name, String modelYear, InterfaceOS os, double screenSize,
@@ -334,7 +340,7 @@ public class Phone implements InterfacePhone {
 		this.simCardFormat = (SimCardFormat) simCardFormat;
 		this.nonRemovableBattery = nonRemovableBattery;
 		this.photo = photo;
-		this.prices = prices;
+		this.price = prices;
 		this.inStock = inStock;
 		this.discount = discount;
 		this.phoneType = (PhoneType) phoneType;
@@ -416,7 +422,7 @@ public class Phone implements InterfacePhone {
 		this.simCardFormat = (SimCardFormat) simCardFormat;
 		this.nonRemovableBattery = nonRemovableBattery;
 		this.photo = photo;
-		this.prices = prices;
+		this.price = prices;
 		this.inStock = 0;
 		this.discount = 0;
 		this.bodyStuff = bodyStuff;
@@ -909,7 +915,7 @@ public class Phone implements InterfacePhone {
 	}		
 
 	public Set<Price> getPrices() {
-		return prices;
+		return price;
 	}
 	
 	public InterfacePrice getLastPrice() {
@@ -936,10 +942,10 @@ public class Phone implements InterfacePhone {
 	}		
 
 	public void setPrices(HashSet<Price> prices) {
-		this.prices = prices;
+		this.price = prices;
 	}
 	public void setPrice(Price price) {
-		this.prices.add(price);
+		this.price.add(price);
 	}
 
 	public double getDiscount() {
@@ -979,7 +985,7 @@ public class Phone implements InterfacePhone {
 	}
 
 	public void addPrice(Price price) {
-		this.prices.add(price);
+		this.price.add(price);
 	}
 	
 	public void addPhoto(Photo photo) {

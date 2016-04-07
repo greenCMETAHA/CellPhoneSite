@@ -16,5 +16,6 @@ public interface InterfaceUserDAO extends Serializable, InterfaceDAO{
 	
 	ArrayList<User> getUsers();
 	User getUser(int id);
+	User getUser(String name);
 	
 }

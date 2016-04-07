@@ -69,6 +69,7 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
 	        transaction.commit();
         } catch (HibernateException e) {
         	System.out.println(e);
+        	System.out.println(e.getCause().toString());
 	        log.error("Error: can't getPhones(): " + e);
 	        transaction.rollback();
 	        //			throw new DAOException(e);
@@ -96,6 +97,7 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
 	        transaction.commit();
         } catch (HibernateException e) {
         	System.out.println(e);
+        	System.out.println(e.getCause().toString());
 	        log.error("Error: can't getPhones(): " + e);
 	        transaction.rollback();
 	        //			throw new DAOException(e);
@@ -120,7 +122,8 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
             }
             transaction.commit();
         } catch (HibernateException e) {
-       	 System.out.println(e);
+       	 	System.out.println(e);
+       	 	System.out.println(e.getCause().toString());
             log.error("Error: can't getPhone("+id+"): " + e);
             transaction.rollback();
             //	throw new DAOException(e);
@@ -136,8 +139,11 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
         Session session = util.getSession();
 
         try {
+        	System.out.println(12);
             transaction = session.beginTransaction();
+            System.out.println(13);
             Query query=session.createQuery("from Phone where name=:valueName");
+            System.out.println(14);
             query.setParameter("valueName", name);
             System.out.println(name);
             List <Phone> list=query.list();
@@ -146,7 +152,7 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
             }
             transaction.commit();
         } catch (HibernateException e) {
-       	 System.out.println(e);
+       	 	System.out.println(e.getCause().toString());  
             log.error("Error: can't getPhone("+name+"): " + e);
             transaction.rollback();
             //	throw new DAOException(e);
@@ -169,6 +175,7 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
 	        transaction.commit();
         } catch (HibernateException e) {
         	System.out.println(e);
+        	System.out.println(e.getCause().toString());
 	        log.error("Error: can't getPhotos(): " + e);
 	        transaction.rollback();
 	        //throw new DAOException(e);
@@ -193,7 +200,8 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
             }
             transaction.commit();
         } catch (HibernateException e) {
-       	 System.out.println(e);
+       	 	System.out.println(e);
+       	 	System.out.println(e.getCause().toString());
             log.error("Error: can't getMainPhoto("+phone.getId()+", "+phone.getName()+"): " + e);
             transaction.rollback();
             //throw new DAOException(e);
@@ -218,7 +226,8 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
             }
             transaction.commit();
         } catch (HibernateException e) {
-       	 System.out.println(e);
+       	 	System.out.println(e);
+       	 	System.out.println(e.getCause().toString());
             log.error("Error: can't getPhoto("+id+"): " + e);
             transaction.rollback();
             //throw new DAOException(e);
@@ -243,7 +252,8 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
             }
             transaction.commit();
         } catch (HibernateException e) {
-       	 System.out.println(e);
+       	 	System.out.println(e);
+       	 	System.out.println(e.getCause().toString());
             log.error("Error: can't getPhoto("+filename+"): " + e);
             transaction.rollback();
             //throw new DAOException(e);
@@ -261,7 +271,7 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
 
         try {
             transaction = session.beginTransaction();
-            Query query=session.createQuery("from Photo where goodPrefix=:goodPrefix and name=:filename and good_id=:good_id");
+            Query query=session.createQuery("from Photo where goodPrefix=:goodPrefix and name=:fileName and phone_id=:good_id");
             query.setParameter("goodPrefix", Service.PHONES_PREFIX);
             query.setParameter("good_id", phone.getId());
             query.setParameter("fileName", filename);
@@ -271,7 +281,8 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
             }
             transaction.commit();
         } catch (HibernateException e) {
-       	 System.out.println(e);
+       	 	System.out.println(e);
+       	 	System.out.println(e.getCause().toString());
             log.error("Error: can't getPhoto("+filename+"): " + e);
             transaction.rollback();
             //throw new DAOException(e);
@@ -294,6 +305,7 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
 	        transaction.commit();
         } catch (HibernateException e) {
         	System.out.println(e);
+        	System.out.println(e.getCause().toString());
 	        log.error("Error: can't getPrices("+phone.getId()+", "+phone.getName()+"): " + e);
 	        transaction.rollback();
 	        //throw new DAOException(e);
@@ -318,7 +330,8 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
             }
             transaction.commit();
         } catch (HibernateException e) {
-       	 System.out.println(e);
+       	 	System.out.println(e);
+       	 	System.out.println(e.getCause().toString());
             log.error("Error: can't getLastPrice("+phone.getId()+", "+phone.getName()+"): " + e);
             transaction.rollback();
             //throw new DAOException(e);
@@ -343,7 +356,8 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
             }
             transaction.commit();
         } catch (HibernateException e) {
-       	 System.out.println(e);
+       	 	System.out.println(e);
+       	 	System.out.println(e.getCause().toString());
             log.error("Error: can't getPrice("+id+"): " + e);
             transaction.rollback();
             // throw new DAOException(e);
@@ -360,7 +374,7 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
 
         try {
             transaction = session.beginTransaction();
-            Query query=session.createQuery("from Price where goodPrefix=:goodPrefix and price=:price and good_id=:good_id");
+            Query query=session.createQuery("from Price where goodPrefix=:goodPrefix and price=:price and phone_id=:good_id");
             query.setParameter("goodPrefix", Service.PHONES_PREFIX);
             query.setParameter("price", price);
             query.setParameter("good_id", phone.getId());
@@ -370,7 +384,8 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
             }
             transaction.commit();
         } catch (HibernateException e) {
-       	 System.out.println(e);
+        	System.out.println(e);
+        	System.out.println(e.getCause().toString());
             log.error("Error: can't getPrice("+phone.getId()+", "+phone.getName()+": "+price+"): " + e);
             transaction.rollback();
             // throw new DAOException(e);

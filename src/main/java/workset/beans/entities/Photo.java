@@ -1,5 +1,6 @@
 package workset.beans.entities;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,7 +36,7 @@ public class Photo implements InterfacePhoto {
 	@Size(min=3, max=3)
 	private String goodPrefix;	
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Phone phone;
 	
 	public Photo(int id, String name, String comment, String goodPrefix, Phone phone) {

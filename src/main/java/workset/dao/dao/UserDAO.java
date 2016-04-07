@@ -108,7 +108,7 @@ public class UserDAO extends DAO implements InterfaceUserDAO {
         }
         return result;
 	}
-
+	
 	@Override
 	public ArrayList<User> getUsers() {
 	   	ArrayList<User> result=new ArrayList<User>();
@@ -154,5 +154,30 @@ public class UserDAO extends DAO implements InterfaceUserDAO {
         }
         return result;
 	}
+	
+	@Override
+	public User getUser(String name) {
+		User result=new User();
+
+        HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+
+        try {
+            transaction = session.beginTransaction();
+            Query query=session.createQuery("from User where name=:valueName");
+            query.setParameter("valueName", name);
+            List <User> list=query.list();
+            if (list.size()>0) {
+                result=list.get(0);
+            }
+            transaction.commit();
+        } catch (HibernateException e) {
+       	 System.out.println(e);
+            log.error("Error: can't getUser("+name+"): " + e);
+            transaction.rollback();
+            // throw new DAOException(e);
+        }
+        return result;
+	}	
 
 }

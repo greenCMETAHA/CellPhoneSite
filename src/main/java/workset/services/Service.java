@@ -7,6 +7,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.security.Principal;
+
+import workset.beans.entities.User;
+import workset.dao.dao.SimpleDAO;
+import workset.dao.dao.UserDAO;
 
 public class Service {
 	public static String PATH_TO_JPG="resources\\jpg\\";
@@ -35,7 +40,6 @@ public class Service {
 			result=value.substring(0, size-1);
 		
 		return result;
-		
 	}
 	
 	public static synchronized String copyPhoto(String oldPhoto, String globalPath){
@@ -88,6 +92,13 @@ public class Service {
 		return result;
 	}
 	
-	
+	public static User getUser(Principal userPrincipal, UserDAO userDAO){
+		User result=new User();
+		if (userPrincipal!=null){
+			result=userDAO.getUser(userPrincipal.getName());		//сделал так чтобы выцепить реальное имя пользователя, а не логин
+		}
+		
+		return result;
+	}
 
 }

@@ -47,10 +47,8 @@ public class User implements InterfaceUser{
 	@Size(min = 0, max = 45)
 	private String password;
 	
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "usertable"
-		, joinColumns = { @JoinColumn(name = "user_id", nullable = false, updatable = false) }
-		, inverseJoinColumns = { @JoinColumn(name = "role_id", nullable = false, updatable = false) })	
+	@OneToMany
+	@JoinTable(name = "usertable")
 	private Set<Role> role;
 	
 	public User(){

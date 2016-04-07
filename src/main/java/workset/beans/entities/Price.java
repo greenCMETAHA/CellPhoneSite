@@ -2,6 +2,7 @@ package workset.beans.entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +18,7 @@ import workset.beans.interfaces.InterfaceUser;
 import workset.beans.entities.User;
 
 @Entity
-@Table( name = "prices")
+@Table( name = "price")
 public class Price implements InterfacePrice{
 	
 	@Id
@@ -39,7 +40,7 @@ public class Price implements InterfacePrice{
 	@ManyToOne
 	private User user;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Phone phone;
 	
 	public Price(){

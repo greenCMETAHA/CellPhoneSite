@@ -325,7 +325,7 @@ public class App {
 			
 			System.out.println("=========================================================");
 			
-*/			
+			
 		Phone phone1=(Phone)phoneDAO.get(Phone.class,1);
 //			Photo photo=new Photo(0, "photo3", "comment3", "Phn", phone1);
 //			
@@ -392,6 +392,17 @@ public class App {
 //			
 //			Set<Photo> photos=(Set<Photo>) phone.getPhoto();
 //			System.out.println(photos.size());
+*/
+			
+			ArrayList<User> userList=userDAO.getUsers();
+			for(User current: userList){
+				System.out.println(""+current.getId()+", "+current.getName());
+				for(Role role: current.getRole()){
+					System.out.println(" --- "+role.getId()+", "+role.getName());
+					
+				}
+			}
+			
 			
 			
 		} catch (Exception e) {

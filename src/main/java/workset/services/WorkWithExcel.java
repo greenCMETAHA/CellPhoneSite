@@ -450,7 +450,7 @@ public class WorkWithExcel {
 							break;
 						}
 						case 1:{
-							if (cell.getCellType()==cell.CELL_TYPE_STRING){
+							if (cell.getCellType()==0){
 								price.setTime(cell.getDateCellValue());
 								price.setGoodPrefix(Service.PHONES_PREFIX);
 								price.setPhone(phone);
@@ -513,9 +513,16 @@ public class WorkWithExcel {
 							break;
 						}
 						case 2:{
-							String value=cell.getStringCellValue().trim();
-							if (value.length()>0){
-								photo.setMain(true);
+							if (cell.getCellType()==cell.CELL_TYPE_NUMERIC){
+								double value=cell.getNumericCellValue();
+								if (value>0){
+									photo.setMain(true);
+								}
+							}else if (cell.getCellType()==cell.CELL_TYPE_STRING){
+								String value=cell.getStringCellValue().trim();
+								if (value.length()>0){
+									photo.setMain(true);
+								}
 							}
 							break;
 						}
@@ -875,19 +882,23 @@ public class WorkWithExcel {
 	    					if (value.getId()==0){
 	    						errors.add("Не нашли телефон по наименованию: "+phone.getName());
 	    						continue;
+	    					}else{
+	    						phone=value;
 	    					}
 	    				}
 	 	        		current.setUser(user);
 	 	        		if (current.getId()==0){
+	 	        			current.setPhone(phone);
 	 	        			Price value=phoneDAO.getPriceByPrice(current.getPrice(), phone);
-	 	        			value.setPhone(phone);
 	    					if (value.getId()==0){
 		    					try{
 			    					phoneDAO.saveOrUpdate(current);
 			    					simpleDAO.saveOrUpdate(new Log(user, new GregorianCalendar().getTime()
 			    							,"Price",""+phone.getId(),phone.getName()+", "+current.getPrice(), "Загрузили из Excel"));
+			    					value=phoneDAO.getPriceByPrice(current.getPrice(), phone);
 		    					}catch(DAOException e){
-		    						System.out.println(e.getStackTrace());
+		    						System.out.println(e);
+		    						System.out.println(e.getCause().toString());
 		    						errors.add(e.getCause().toString());
 		    					}
 	    					}
@@ -901,8 +912,8 @@ public class WorkWithExcel {
 			String priceFile=fileExcel.getOriginalFilename().trim();
 			if (!priceFile.contains(".xlsx")){
 				errors.add("Указанный Вами файл с ценами не соответствует формату. Используйте Excel-файл с расширением *.xlsx");
-			}else{
-				ArrayList<Photo> list = importFromExcelPhoto(convertMultipartFile(fileExcel),session.getServletContext().getRealPath("/"));   
+			}else{   
+				ArrayList<Photo> list = importFromExcelPhoto(convertMultipartFile(fileExcel),session.getServletContext().getRealPath("/"));
 	 	        synchronized (list){
 	 	        	for (Photo current:list){
 	 	        		Phone phone = current.getPhone();
@@ -912,15 +923,21 @@ public class WorkWithExcel {
 	    					if (value.getId()==0){
 	    						errors.add("Не нашли телефон по наименованию: "+phone.getName());
 	    						continue;
+	    					}else{
+	    						phone=value;
 	    					}
 	    				}
 	 	        		if (current.getId()==0){
+	 	        			current.setPhone(phone);
+	 	        			
+	 	        			current.setName(Service.copyPhoto(current.getName(), session.getServletContext().getRealPath("/"))); //копируем картинку в каталог сервера
 	 	        			Photo value=phoneDAO.getPhoto(current.getName(), phone);
 	    					if (value.getId()==0){
 		    					try{
 			    					phoneDAO.saveOrUpdate(current);
 			    					simpleDAO.saveOrUpdate(new Log(user, new GregorianCalendar().getTime()
 			    							,"Photo",""+phone.getId(),phone.getName(), "Загрузили из Excel"));
+			    					value=phoneDAO.getPhoto(current.getName(), phone);
 		    					}catch(DAOException e){
 		    						System.out.println(e.getStackTrace());
 		    						errors.add(e.getCause().toString());
