@@ -11,6 +11,8 @@ import workset.dao.dao.exceptions.DAOException;
 public interface InterfacePhoneDAO extends Serializable, InterfaceDAO {
 
 	ArrayList<Phone> getPhones();
+	ArrayList<Phone> getPhonesByPhoneType(int id, int page);
+	ArrayList<Phone> getPhonesByManufacturer(int id, int page);
 	ArrayList<Phone> getPhones(int page);
 	Phone getPhone(int id);
 	Phone getPhone(String name);

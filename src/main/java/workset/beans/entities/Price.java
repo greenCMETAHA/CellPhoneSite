@@ -1,6 +1,7 @@
 package workset.beans.entities;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -44,6 +45,7 @@ public class Price implements InterfacePrice{
 	private Phone phone;
 	
 	public Price(){
+		this.time = new GregorianCalendar(1, 1, 1).getTime();
 	}
 
 	public Price(int id, Date date, double price, User user, String goodPrefix, Phone phone) {
@@ -106,8 +108,12 @@ public class Price implements InterfacePrice{
 	 * @return the price
 	 */
 	public double getPrice() {
-		return price;
+		return price; 
 	}
+	
+	public String getStringPrice() {
+		return String.format("%.12f", price); 
+	}	
 
 	/**
 	 * @param price the price to set

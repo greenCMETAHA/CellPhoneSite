@@ -3,6 +3,11 @@
 <%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 
-	Пардоньте, страница ещё не сделана 
-	<br><br>
-	<a href="index">В начало</a>
+<div class="main">
+	<div class="page"  >
+		Пардоньте, страница ещё не сделана </p>
+
+		<div class="clear"></div>
+		<a href="index">  Перейти на главную страницу</a>	
+	</div>
+</div>

@@ -8,10 +8,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.Principal;
+import java.util.GregorianCalendar;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.http.HttpRequest;
+import org.springframework.ui.Model;
+
+import workset.beans.entities.Log;
 import workset.beans.entities.User;
+import workset.dao.dao.PhoneDAO;
 import workset.dao.dao.SimpleDAO;
 import workset.dao.dao.UserDAO;
+import workset.dao.dao.exceptions.DAOException;
 
 public class Service {
 	public static String PATH_TO_JPG="resources\\jpg\\";
@@ -99,6 +108,15 @@ public class Service {
 		}
 		
 		return result;
+	}
+
+	public static void defaultAttributes(Model model, SimpleDAO simpleDAO, UserDAO userDAO, HttpServletRequest request) {
+		model.addAttribute("listMobileTypes", simpleDAO.getPhoneTypes());
+		model.addAttribute("listManufacturers", simpleDAO.getManufacturers());
+		
+		User user=Service.getUser(request.getUserPrincipal(), userDAO);
+		model.addAttribute("user", user);
+		
 	}
 
 }

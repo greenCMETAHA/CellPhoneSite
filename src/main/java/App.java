@@ -392,16 +392,34 @@ public class App {
 //			
 //			Set<Photo> photos=(Set<Photo>) phone.getPhoto();
 //			System.out.println(photos.size());
-*/
 			
-			ArrayList<User> userList=userDAO.getUsers();
-			for(User current: userList){
-				System.out.println(""+current.getId()+", "+current.getName());
-				for(Role role: current.getRole()){
-					System.out.println(" --- "+role.getId()+", "+role.getName());
-					
-				}
+//			ArrayList<User> userList=userDAO.getUsers();
+//			for(User current: userList){
+//				System.out.println(""+current.getId()+", "+current.getName());
+//				for(Role role: current.getRole()){
+//					System.out.println(" --- "+role.getId()+", "+role.getName());
+//					
+//				}
+//			}
+ 
+ */
+			
+			System.out.println("===1");
+			
+			ArrayList<Phone> list23=phoneDAO.getPhonesByManufacturer(58, 1);
+			System.out.println(""+list23.size());
+			for (Phone current:list23){
+				System.out.println(""+current.getId()+current.getName());
 			}
+			System.out.println("===2");
+
+			ArrayList<Phone> list24=phoneDAO.getPhonesByPhoneType(2, 1);
+			System.out.println(""+list23.size());
+			for (Phone current:list24){
+				System.out.println(""+current.getId()+current.getName());
+			}
+			System.out.println("===");
+			
 			
 			
 			

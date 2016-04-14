@@ -54,31 +54,76 @@ public class MainController {
 //			@RequestParam(value = "id", defaultValue="0", required=false) int id,
 //			@RequestParam(value = "adminpanel", defaultValue="false", required=false) boolean adminpanel,
 			HttpServletRequest request,Locale locale, Model model) {
-
+		
+		Service.defaultAttributes(model, simpleDAO, userDAO, request);
+		
 		HttpSession session=request.getSession();
 
 		return "index";
 	}
 	
+	@RequestMapping(value = {"/FullCatalog"}, method = {RequestMethod.POST, RequestMethod.GET})
+	public String fullCatalog(HttpServletRequest request,Locale locale, Model model) {
+		
+		Service.defaultAttributes(model, simpleDAO, userDAO, request);
+		
+		ArrayList<Phone> listPhones=phoneDAO.getPhones(1);
+		
+		ArrayList<Phone> listDesctops=new ArrayList<Phone>();
+
+		model.addAttribute("listPhones", listPhones);
+		model.addAttribute("listDesktops", listDesctops);
+	
+		return "FullCatalog";
+	}	
+	
 	@RequestMapping(value = {"/Catalog"}, method = {RequestMethod.POST, RequestMethod.GET})
 	public String list(
 //			@RequestParam(value = "variant", defaultValue="", required=false) String variant,
-//			@RequestParam(value = "id", defaultValue="0", required=false) int id,
-//			@RequestParam(value = "adminpanel", defaultValue="false", required=false) boolean adminpanel,
+			@RequestParam(value = "phoneType", defaultValue="0", required=false) int phoneTypeValue,
+			@RequestParam(value = "manufacturer", defaultValue="0", required=false) int manufacturerValue,
+			@RequestParam(value = "page", defaultValue="1", required=false) int page,
 			HttpServletRequest request,Locale locale, Model model) {
 		
-//		model.addAttribute("list", phoneDAO.getPhones());
-		ArrayList<Phone> list=phoneDAO.getPhones(1);
+		Service.defaultAttributes(model, simpleDAO, userDAO, request);
+		
+		ArrayList<Phone> list=new ArrayList<Phone>();
+		if (phoneTypeValue!=0){
+			list=phoneDAO.getPhonesByPhoneType(phoneTypeValue, page);
+		}else if (manufacturerValue!=0){
+			list=phoneDAO.getPhonesByManufacturer(manufacturerValue, page);
+		}else{
+			list=phoneDAO.getPhones();
+		}
+
 		model.addAttribute("list", list);
 		model.addAttribute("header", "Список товаров:");
 	
 		return "Catalog";
 	}
 	
+	@RequestMapping(value = {"/ShowOne"}, method = {RequestMethod.POST, RequestMethod.GET})
+	public String showOne(
+			@RequestParam(value = "good", defaultValue="0", required=false) int good,
+			HttpServletRequest request,Locale locale, Model model) {
+		String result="index";
+		
+		Service.defaultAttributes(model, simpleDAO, userDAO, request);
+		
+		if (good!=0){
+			model.addAttribute("good", phoneDAO.getPhone(good));
+			result="ShowOne";
+		}
+	
+		return result;
+	}	
+	
+	
 	@RequestMapping(value = {"/About"}, method = {RequestMethod.POST, RequestMethod.GET})
 	public String about(
 			HttpServletRequest request,Locale locale, Model model) {
 		
+		Service.defaultAttributes(model, simpleDAO, userDAO, request);
 	
 		return "About";
 	}
@@ -87,7 +132,8 @@ public class MainController {
 	public String basket(
 			HttpServletRequest request,Locale locale, Model model) {
 		
-	
+		Service.defaultAttributes(model, simpleDAO, userDAO, request);
+		
 		return "Basket";
 	}
 	
@@ -95,6 +141,7 @@ public class MainController {
 	public String profile(
 			HttpServletRequest request,Locale locale, Model model) {
 		
+		Service.defaultAttributes(model, simpleDAO, userDAO, request);
 	
 		return "Profile";
 	}
@@ -102,6 +149,8 @@ public class MainController {
 	@RequestMapping(value = {"/ShopAddresses"}, method = {RequestMethod.POST, RequestMethod.GET})
 	public String shopAddresses(
 			HttpServletRequest request,Locale locale, Model model) {
+		
+		Service.defaultAttributes(model, simpleDAO, userDAO, request);
 		
 		ArrayList<Shop> list=simpleDAO.getShops();
 		model.addAttribute("list", list);
@@ -113,6 +162,7 @@ public class MainController {
 	public String wayToPay(
 			HttpServletRequest request,Locale locale, Model model) {
 		
+		Service.defaultAttributes(model, simpleDAO, userDAO, request);
 	
 		return "WayToPay";
 	}
@@ -123,6 +173,7 @@ public class MainController {
 			,@RequestParam(value = "searchButton", defaultValue="", required=false) String searchButton
 			,HttpServletRequest request,Locale locale, Model model) {
 
+		Service.defaultAttributes(model, simpleDAO, userDAO, request);
 		
 		ArrayList<Phone> list=phoneDAO.getPhones(1);
 		model.addAttribute("list", list);
@@ -137,6 +188,8 @@ public class MainController {
 	public String select(
 			HttpServletRequest request,Locale locale, Model model) {
 		
+		Service.defaultAttributes(model, simpleDAO, userDAO, request);
+		
 		ArrayList<Phone> list=phoneDAO.getPhones(1);
 		model.addAttribute("list", list);
 		model.addAttribute("header", "Результаты отбора:");
@@ -148,29 +201,31 @@ public class MainController {
 	public String compare(
 			HttpServletRequest request,Locale locale, Model model) {
 		
+		Service.defaultAttributes(model, simpleDAO, userDAO, request);
+		
 		ArrayList<Phone> list=phoneDAO.getPhones(1);
 		model.addAttribute("list", list);
 		model.addAttribute("header", "Сравним товары:");
 		
 		return "Compare";
 	}
-	
-	@RequestMapping(value = { "/login"}, method = {RequestMethod.POST, RequestMethod.GET})
-	public String login(
-			HttpServletRequest request,Locale locale, Model model) {
-		
-		System.out.println("login");
-		return "Page404";  //login
-	}	
-	
-	@RequestMapping(value = { "/logout"}, method = {RequestMethod.POST, RequestMethod.GET})
-	public String logout(
-			HttpServletRequest request,Locale locale, Model model) {
-		
-		System.out.println("logout");
-		return "Page404";  //login
-	}	
-	
+//	
+//	@RequestMapping(value = { "/login"}, method = {RequestMethod.POST, RequestMethod.GET})
+//	public String login(
+//			HttpServletRequest request,Locale locale, Model model) {
+//		
+//		System.out.println("login");
+//		return "Page404";  //login
+//	}	
+//	
+//	@RequestMapping(value = { "/logout"}, method = {RequestMethod.POST, RequestMethod.GET})
+//	public String logout(
+//			HttpServletRequest request,Locale locale, Model model) {
+//		
+//		System.out.println("logout");
+//		return "Page404";  //login
+//	}	
+//	
 
 	
 	//атрибуты сессии

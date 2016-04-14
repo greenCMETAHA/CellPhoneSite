@@ -13,21 +13,25 @@
     <meta name="author" content="">
     <meta name="keywords" content="MediaCenter, Template, eCommerce">
     <meta name="robots" content="all">
-    <title>Продажа телtфонов</title>
+    <title>Продажа телефонов</title>
  </head>
 <body>
+<div class="wrap">
     <tiles:insertAttribute name="Header" />
     
     <table border="1">
     	<tr>
-    		<td width="230">
+    		<td width="300">
     			<tiles:insertAttribute name="Menu"></tiles:insertAttribute>
     		</td>
-    		<td width="800">
+    		<td width="0,5%">
+    		</td>
+    		<td width="100%" align="left">
 				<tiles:insertAttribute name="Body"></tiles:insertAttribute>    		
     		</td>
     	</tr>
     </table>
 	<tiles:insertAttribute name="Footer"></tiles:insertAttribute>
+</div>
 </body>
 </html>

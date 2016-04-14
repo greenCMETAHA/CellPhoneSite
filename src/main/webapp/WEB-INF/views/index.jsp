@@ -4,8 +4,23 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <html>
 <body>
-	index
+<div class="content">
+	<h2>Добро пожаловать в проект интернет-магазина.</h2>
+	<br>Проект разработан Васильченко Г.Л., ака greenCMETAHA.<br>
 	<br><br>
-	<a href="Catalog">Перейти к списку телефонов</a>
+	<hr>	
+	<h2>Использованные технологии:</h2>
+	<br>Java 1.7
+	<br>Hibernate
+	<br>Spring (Security, MVC, Tiles)
+	<br><br>
+	<br>Git
+	<br>PayPal
+	<br>
+	<br>Разработано на Eclipse Mars
+	
+	 
+	<hr>
+</div>		
 </body>  
 </html>

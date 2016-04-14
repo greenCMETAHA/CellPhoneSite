@@ -4,8 +4,13 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <html>
 <body>
-	Профиль пользователя
-	<br><br>
-	<a href="index">В начало</a>
+<div class="content">
+	<h2>Профиль пользователя</h2>
+	<hr>
+	<br>
+	Пока тут нет особой информации.
+	Планируется выводить данные о залогинившемся пользователе.
+	
+</div>
 </body>  
 </html>

@@ -4,8 +4,13 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <html>
 <body>
-	Способ оплаты и доставка
-	<br><br>
-	<a href="index">В начало</a>
+<div class="content">
+	<h2>Способ оплаты и доставка</h2>
+	<hr>
+	<br>
+	<br>Способа оплатить наши товары пока не существует.
+	<br>Но в дальнейшем я прикручу PayPal, и Вы сможете просто так кидать свои деньги мне на тестовый кошелёк =)
+	
+</div>
 </body>  
 </html>

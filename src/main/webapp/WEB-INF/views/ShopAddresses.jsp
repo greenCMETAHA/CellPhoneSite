@@ -4,7 +4,8 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <html>
 <body>
-	Наши магазины:
+<div class="content">
+	<h2>Наши магазины:</h2>
 	
 	<br><hr><br>
 	<div>
@@ -15,7 +16,7 @@
 			</c:forEach>
 		</ul>
 	</div>
-	<br><hr><br>
-	<a href="index">В начало</a>
+	<br>
+ </div>
 </body>  
 </html>

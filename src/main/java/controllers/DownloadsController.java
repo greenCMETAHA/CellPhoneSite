@@ -43,6 +43,8 @@ public class DownloadsController {
 			@RequestParam(value = "fileExcel", required = false) MultipartFile fileExcel,
 			HttpServletRequest request,Locale locale, Model model) {
 		
+		Service.defaultAttributes(model, simpleDAO, userDAO, request);
+		
 		User user=userDAO.getUser(1); //временная загрушка
 		
 		ArrayList<String> list=new ArrayList<String>();	//list - список с ошибками при загрузке 
@@ -62,6 +64,8 @@ public class DownloadsController {
 			@RequestParam(value = "fileExcel", required = false) MultipartFile fileExcel,
 			HttpServletRequest request,Locale locale, Model model) {
 
+		Service.defaultAttributes(model, simpleDAO, userDAO, request);
+		
 		User user=userDAO.getUser(1); //временная загрушка
 		
 		ArrayList<String> list=new ArrayList<String>();	//list - список с ошибками при загрузке 
@@ -92,6 +96,8 @@ public class DownloadsController {
 			@RequestParam(value = "fileExcel", required = false) MultipartFile fileExcel,
 			HttpServletRequest request,Locale locale, Model model) {
 
+		Service.defaultAttributes(model, simpleDAO, userDAO, request);
+		
 		User user=userDAO.getUser(1); //временная загрушка
 		
 		ArrayList<String> list=new ArrayList<String>();	//list - список с ошибками при загрузке 

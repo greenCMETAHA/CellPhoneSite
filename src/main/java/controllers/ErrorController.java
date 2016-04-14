@@ -19,10 +19,21 @@ import org.springframework.web.servlet.ModelAndView;
 import workset.dao.dao.PhoneDAO;
 import workset.dao.dao.SimpleDAO;
 import workset.dao.dao.UserDAO;
+import workset.services.Service;
 
 @Controller
 @SessionAttributes({"user", "basket", "wishList"})
 public class ErrorController {
+	
+	@Autowired
+	SimpleDAO simpleDAO;
+	
+	@Autowired
+	PhoneDAO phoneDAO;
+
+	@Autowired
+	UserDAO userDAO;
+	
 
 	@ExceptionHandler(Exception.class)
 	public ModelAndView handleAllException(Exception ex,
@@ -63,6 +74,9 @@ public class ErrorController {
 			@RequestParam(value = "id", defaultValue = "0", required = false) int id, HttpServletRequest request,
 			Locale locale, Model model) {
 
+		Service.defaultAttributes(model, simpleDAO, userDAO, request);
+		
+		
 		model.addAttribute("errNumber", "403");
 		model.addAttribute("errMessage", "У Вас нет доступа к этой странице.");
 		System.out.println("/error");
@@ -75,8 +89,10 @@ public class ErrorController {
 	 public String viewEdit(@PathVariable("name") final String name, Model model
 			,HttpServletRequest request,HttpServletResponse response) {
 		
+		 Service.defaultAttributes(model, simpleDAO, userDAO, request);
+		 
 		 System.out.println("/{name}");
-		return "Page404";
+		 return "Page404";
 
     }	
 

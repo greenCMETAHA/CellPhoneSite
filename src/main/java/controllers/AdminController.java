@@ -42,6 +42,8 @@ public class AdminController {
 	public String logout(
 			HttpServletRequest request,Locale locale, Model model) {
 		
+		Service.defaultAttributes(model, simpleDAO, userDAO, request);
+		
 		model.addAttribute("isAdmin", true);
 		
 		return "AdminPanel";  //login
@@ -52,6 +54,8 @@ public class AdminController {
 			@RequestParam(value = "variant", defaultValue="", required=false) String variant
 			,@RequestParam(value = "id", defaultValue="0", required=false) int id
 			,HttpServletRequest request,Locale locale, Model model) {
+	
+		Service.defaultAttributes(model, simpleDAO, userDAO, request);
 		
 		HttpSession session=request.getSession();
 		User user=Service.getUser(request.getUserPrincipal(), userDAO);

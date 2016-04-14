@@ -103,7 +103,63 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
 	        //			throw new DAOException(e);
         }
         return result;	
-	}	 	
+	}
+	
+	@Override
+	public ArrayList<Phone> getPhonesByPhoneType(int id, int page) {
+		ArrayList<Phone> result=new ArrayList<Phone>();
+
+    	HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+        
+        int phonesOnPage=Service.ELEMENTS_ON_PAGE;
+
+        try {
+	        transaction = session.beginTransaction();
+	        Query query=session.createQuery("from Phone where phonetype_id=:phoneTypeId");
+	        query.setParameter("phoneTypeId", id);
+	        query.setFirstResult((page-1)*phonesOnPage);
+	        query.setMaxResults(phonesOnPage);
+
+	        result=(ArrayList)query.list();
+	        transaction.commit();
+        } catch (HibernateException e) {
+        	System.out.println(e);
+        	System.out.println(e.getCause().toString());
+	        log.error("Error: can't getPhones(): " + e);
+	        transaction.rollback();
+	        //			throw new DAOException(e);
+        }
+        return result;	
+    }
+
+	@Override
+	public ArrayList<Phone> getPhonesByManufacturer(int id, int page)  {
+		ArrayList<Phone> result=new ArrayList<Phone>();
+
+    	HibernateUtil util = HibernateUtil.getHibernateUtil();
+        Session session = util.getSession();
+        
+        int phonesOnPage=Service.ELEMENTS_ON_PAGE;
+
+        try {
+	        transaction = session.beginTransaction();
+	        Query query=session.createQuery("from Phone where manufacturer_id=:manufacturerId"); 
+	        query.setParameter("manufacturerId", id);
+	        query.setFirstResult((page-1)*phonesOnPage);
+	        query.setMaxResults(phonesOnPage);
+
+	        result=(ArrayList)query.list();
+	        transaction.commit();
+        } catch (HibernateException e) {
+        	System.out.println(e);
+        	System.out.println(e.getCause().toString());
+	        log.error("Error: can't getPhones(): " + e);
+	        transaction.rollback();
+	        //			throw new DAOException(e);
+        }
+        return result;		}
+
 
 	@Override
 	public Phone getPhone(int id) {
@@ -392,5 +448,6 @@ public class PhoneDAO extends DAO implements InterfacePhoneDAO{
         }
         return result;
 	}
+
 
 }

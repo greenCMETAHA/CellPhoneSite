@@ -855,7 +855,23 @@ public class Phone implements InterfacePhone {
 	}
 
 	public String getDescription() {
-		return description;
+		String result=description;
+		if (result==null){
+			result="";
+		}
+		
+		return result;
+	}
+
+	public String getDescription(int symbols) {
+		String result=description;
+		if (result==null){
+			result="";
+		}else if (result.length()>symbols){
+			result=result.substring(0,symbols)+"...";
+		}
+		
+		return result;
 	}
 
 	public void setDescription(String description) {
@@ -906,6 +922,25 @@ public class Phone implements InterfacePhone {
 		return photo;
 	}
 
+	public String getMainPhoto() {
+		Photo result=new Photo();
+		
+		Set<Photo> photos=getPhotos();
+		if (photos.size()>0){
+			for (Photo current:photos){
+				if (result.getId()==0){ //first element
+					result=current;
+				}
+				if (current.isMain()){ //main element
+					result=current;
+					break;
+				}
+			}
+		}
+		
+		return result.getName();
+	}
+	
 	public void setPhotos(HashSet<Photo> photo) {
 		this.photo = photo;
 	}
@@ -939,6 +974,18 @@ public class Phone implements InterfacePhone {
 		double priceWithDiscount=result.getPrice()-getDiscount();
 		
 		return priceWithDiscount;
+	}
+	
+	public String getStringPriceWithDiscount() {
+		InterfacePrice result=new Price();
+		for (InterfacePrice currentPrice:getPrices()){
+			if (result.getTime().getTime()<currentPrice.getTime().getTime()){
+				result=currentPrice;
+			}
+		}
+		double priceWithDiscount=result.getPrice()-getDiscount();
+		
+		return String.format("%.12f", priceWithDiscount);
 	}		
 
 	public void setPrices(HashSet<Price> prices) {

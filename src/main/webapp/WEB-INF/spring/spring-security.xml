@@ -41,7 +41,10 @@
             <jdbc-user-service id="userService"
                 data-source-ref="dataSource"
                 users-by-username-query="select login, password, TRUE from users where login=?"
-                authorities-by-username-query="SELECT u.login, r.name FROM roles AS r, users AS u where (u.role=r.id) and u.login=?"/>
+                authorities-by-username-query="SELECT u.login, r.name FROM roles AS r
+                		 inner join usertable AS ut ON (r.id=ut.role_id)
+                		 inner join users AS u ON (ut.users_id=u.id)
+                		 where u.login=?"/>
         </authentication-provider>
     </authentication-manager>
 </beans:beans>
