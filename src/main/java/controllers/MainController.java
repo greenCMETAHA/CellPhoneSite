@@ -130,11 +130,32 @@ public class MainController {
 	
 	@RequestMapping(value = {"/Basket"}, method = {RequestMethod.POST, RequestMethod.GET})
 	public String basket(
+			@RequestParam(value = "good", defaultValue="", required=false) int goodId,
+			@RequestParam(value = "back", defaultValue="", required=false) String backPage,
 			HttpServletRequest request,Locale locale, Model model) {
+		String result="Basket";
 		
+		HttpSession session=request.getSession();
 		Service.defaultAttributes(model, simpleDAO, userDAO, request);
 		
-		return "Basket";
+		HashSet<Basket>  basket =  (HashSet<Basket>) session.getAttribute("basket");
+		if (basket==null){
+			basket=createBasket();
+		}
+		if (goodId!=0){
+			Phone phone=phoneDAO.getPhone(goodId);
+			double price=phone.getPriceWithDiscount();
+			basket.add(new Basket(phone,price,1));
+		}
+		
+		if (backPage.length()>0){
+			result="redirect:"+backPage;
+		}else if (goodId>0){
+			result="Catalog";
+		}
+		
+		return result;
+		
 	}
 	
 	@RequestMapping(value = {"/Profile"}, method = {RequestMethod.POST, RequestMethod.GET})

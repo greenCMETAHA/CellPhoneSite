@@ -4,8 +4,17 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <html>
 <body>
-	Список покупок:
-	<br><br>
-	<a href="index">В начало</a>
+	<c:set  var="name" value="basket" />
+    <c:set var="basket" value="${sessionScope[name]}"></c:set>
+	Список покупок:<br>
+	<div class="clear"></div>
+	<c:forEach var="current" items="${basket}">
+		<img height="70" src="resources/jpg/${current.getGood().getMainPhoto()}" alt="" />   <c:out value="${current.getName()}"/><br>
+		<c:out value="${current.getQuantuty()}"/><br>
+		по цене: <c:out value="${current.getPrice()}"/><br>
+		на сумму: <c:out value="${current.getQuantuty()*current.getPrice()}"/>
+		<div class="clear"></div>
+		<hr>		
+	</c:forEach>
 </body>  
 </html>

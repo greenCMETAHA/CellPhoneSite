@@ -61,7 +61,7 @@
 						 	 
 						 	
 						 <div class="button"><span><img src="resources/js/images/cart.jpg" alt="" />
-						  	<a href="ShowOne?good=${current.getId()}" class="cart-button">В корзину</a></span>
+						  	<a href="Basket?good=${current.getId()}" class="cart-button">В корзину</a></span>
 						 </div>
 					     <div class="button"><span><a href="ShowOne?good=${current.getId()}" class="details">Подробно</a></span>
 					     </div>

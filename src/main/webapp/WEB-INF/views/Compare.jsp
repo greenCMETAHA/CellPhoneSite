@@ -4,6 +4,8 @@
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <html>
 <body>
+	<c:set  var="name" value="compare" />
+    <c:set var="compare" value="${sessionScope[compare]}"></c:set>
 
 	<div class="content">
 		<hr>
